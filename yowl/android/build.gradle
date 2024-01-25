@@ -4,10 +4,15 @@ buildscript {
         google()
         mavenCentral()
     }
-
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        // Add the classpath for the Google services Gradle plugin
+        classpath 'com.google.gms:google-services:4.4.0'
     }
+}
+
+plugins {
+    id 'com.google.gms.google-services' version '4.4.0' apply false
 }
 
 allprojects {
@@ -20,9 +25,12 @@ allprojects {
 rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
-}
-subprojects {
     project.evaluationDependsOn(':app')
+
+    // Apply specific plugins to subprojects as needed
+    // Example:
+    // apply plugin: 'java'
+    // apply plugin: 'com.google.gms.google-services'
 }
 
 tasks.register("clean", Delete) {
