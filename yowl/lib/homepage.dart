@@ -39,33 +39,19 @@ class HomePage extends StatelessWidget{
       body: const Center(
         child: Text('Home page'),
       ),
-    );
-  }
-}
-
-class MenuBurger extends StatelessWidget {
-  const MenuBurger({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color : Colors.black,
-          ),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const HomePage()),
-            );
-          },
+      bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        items: const [
+        BottomNavigationBarItem(
+          icon: Icon(Icons.home),
+          label: 'Home',
         ),
-      ),
-      body: const Center(
-        child: Text('Menu burger'),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.mail),
+          label: 'Second',
+        ),
+        ],
       ),
     );
   }
