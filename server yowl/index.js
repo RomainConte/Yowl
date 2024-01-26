@@ -1,7 +1,7 @@
-import express from 'express';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
+const express = require('express');
+const firebase = require('firebase/compat/app');
+require('firebase/compat/auth');
+require('firebase/compat/firestore');
 
 const app = express();
 
@@ -30,8 +30,6 @@ app.get('/api/users', async (req, res) => {
                 response.push(doc.data());
             }
 
-            
-
             console.log('Data from Firestore:', response); 
 
             return res.status(200).send(response);
@@ -42,6 +40,14 @@ app.get('/api/users', async (req, res) => {
     }
 });
 
+app.get('/', (req, res) => {
+    res.send('Hello, world!');
+});
+
+
+app.get('/users', (req, res) => {
+    res.send('This is the /users route');
+});
 
 
 
