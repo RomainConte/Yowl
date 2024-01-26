@@ -25,16 +25,7 @@ return Scaffold(
 appBar: AppBar(
 backgroundColor: Colors.white,
 elevation: 0,
-leading:  IconButton(
-icon: const Icon(
-Icons.person,
-color : Colors.black,
-size: 40,
-),
-onPressed: () {
-  Navigator.pop(context);
-},
-),
+
 ),
 body: const Center(
 child: Text('Second page'),
