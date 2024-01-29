@@ -1,7 +1,7 @@
-const express = require('express');
-const firebase = require('firebase/compat/app');
-require('firebase/compat/auth');
-require('firebase/compat/firestore');
+import express from 'express';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 const app = express();
 
@@ -12,8 +12,7 @@ const firebaseConfig = {
     storageBucket: "yowl-8ba22.appspot.com",
     messagingSenderId: "563570543946",
     appId: "1:563570543946:web:2785e47df1cdfd7a4c05b3"
-  };
-  
+};
 
 firebase.initializeApp(firebaseConfig);
 
