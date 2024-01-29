@@ -57,7 +57,7 @@ class Profil extends StatelessWidget {
   final String searchText;
 
   Future<List<dynamic>> fetchUsers() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:1000/api/users'));
+    final response = await http.get(Uri.parse('http://10.0.2.2:1337/api/users'));
 
     if (response.statusCode == 200) {
       return json.decode(response.body);
@@ -79,7 +79,7 @@ class Profil extends StatelessWidget {
           return const Text('No data available');
         } else if (snapshot.hasData) {
           final userList = snapshot.data as List<dynamic>;
-          final filteredUserList = userList.where((user) => user['name'].toLowerCase().contains(searchText.toLowerCase())).toList();
+          final filteredUserList = userList.where((user) => user['username'].toLowerCase().contains(searchText.toLowerCase())).toList();
 
           return ListView.builder(
             itemCount: filteredUserList.length,
@@ -87,7 +87,7 @@ class Profil extends StatelessWidget {
               final user = filteredUserList[index] as Map<String, dynamic>;
 
               return ListTile(
-                title: Text('Name: ${user['name']}'),
+                title: Text('Name: ${user['username']}'),
                 subtitle: Text('Email: ${user['email']}'),
               );
             },
