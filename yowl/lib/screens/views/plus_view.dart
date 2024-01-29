@@ -6,6 +6,6 @@ class PlusView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('Home'),);
+      child: Text('Plus'),);
   }
 }

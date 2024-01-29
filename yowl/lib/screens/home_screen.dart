@@ -48,7 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ]),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.orange, // This will make the selected icon orange
+          selectedItemColor: Colors.orange,
+          unselectedItemColor: Colors.grey,
           onTap: (index){
             setState(() {
               _selectedIndex = index;
@@ -56,25 +57,25 @@ class _HomeScreenState extends State<HomeScreen> {
 
             _pageController.jumpToPage(_selectedIndex);
           },
-          items: const [
+          items:  const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: Colors.black),
+              icon: Icon(Icons.home),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search, color: Colors.black),
+              icon: Icon(Icons.search),
               label: 'search',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.hdr_plus, color: Colors.black),
+              icon: Icon(Icons.add_circle_outline),
               label: 'Plus',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: Colors.black),
+              icon: Icon(Icons.home),
               label: 'Totem',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person, color: Colors.black),
+              icon: Icon(Icons.person),
               label: 'Profile',
             ),
           ],
