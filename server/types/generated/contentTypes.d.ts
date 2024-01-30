@@ -469,6 +469,7 @@ export interface ApiPostPost extends Schema.CollectionType {
       'oneToMany',
       'api::commentaire.commentaire'
     >;
+    image_url: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
