@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "animals",
+  "info": {
+    "singularName": "animal",
+    "pluralName": "animals",
+    "displayName": "animal",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "animal_totem"
+    },
+    "number_individuals": {
+      "type": "integer"
+    },
+    "state": {
+      "type": "string"
+    },
+    "Location": {
+      "type": "string"
+    },
+    "number_species": {
+      "type": "integer"
+    },
+    "species": {
+      "type": "string"
+    },
+    "lifetime": {
+      "type": "integer"
+    },
+    "vmax": {
+      "type": "integer"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
