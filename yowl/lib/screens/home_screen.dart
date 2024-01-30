@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late final PageController _pageController;
-  int _selectedIndex = 1;
+  int _selectedIndex = 0;
 
 @override
   void initState() {
