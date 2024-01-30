@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:yowl/screens/home_screen.dart';
-
+import 'package:yowl/screens/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -23,13 +23,12 @@ class _LoginScreenState extends State<LoginScreen> {
     );
 
     if (response.statusCode == 200) {
-  // Login successful, navigate to home page
-  Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => HomeScreen()),
-  );
-}
-else {
+      // Login successful, navigate to home page
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } else {
       // Login failed, show error message
       showDialog(
         context: context,
@@ -45,6 +44,14 @@ else {
         ),
       );
     }
+  }
+
+  // Function to navigate to the RegisterScreen
+  void navigateToRegisterScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RegisterScreen()),
+    );
   }
 
   @override
@@ -77,15 +84,15 @@ else {
               onPressed: login,
               child: Text('Login'),
             ),
+            SizedBox(height: 16.0),
+            // Add a sign-up button
+            ElevatedButton(
+              onPressed: navigateToRegisterScreen,
+              child: Text('Sign Up'),
+            ),
           ],
         ),
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: LoginScreen(),
-  ));
 }
