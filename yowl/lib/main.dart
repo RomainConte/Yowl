@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+
 import 'package:yowl/screens/home_screen.dart';
 import 'package:yowl/screens/profile_other_screen.dart';
+
+import 'package:yowl/screens/login_screen.dart';
+
 
 void main() {
   runApp(const App());
@@ -14,7 +18,8 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Guigui Hub',
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+
+      home: LoginScreen(),
       initialRoute: '/',
       routes: {
         '/profile_other': (context) {
@@ -23,6 +28,7 @@ class App extends StatelessWidget {
           return OtherProfilePage(user: user);
         },
       },
+
     );
   }
 }

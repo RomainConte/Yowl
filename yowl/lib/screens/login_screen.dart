@@ -1,6 +1,62 @@
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget {
+
+import 'package:http/http.dart' as http;
+import 'package:yowl/screens/home_screen.dart';
+import 'package:yowl/screens/register_screen.dart';
+
+class LoginScreen extends StatefulWidget {
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  Future<void> login() async {
+    final url = Uri.parse('http://10.0.2.2:1337/api/auth/local');
+    final response = await http.post(
+      url,
+      body: {
+        'identifier': emailController.text,
+        'password': passwordController.text,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      // Login successful, navigate to home page
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomeScreen()),
+      );
+    } else {
+      // Login failed, show error message
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Login Failed'),
+          content: Text('Invalid email or password'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+  // Function to navigate to the RegisterScreen
+  void navigateToRegisterScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => RegisterScreen()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,12 +69,18 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+
+              controller: emailController,
+
               decoration: InputDecoration(
                 labelText: 'Email',
               ),
             ),
             SizedBox(height: 16.0),
             TextField(
+
+              controller: passwordController,
+
               obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Password',
@@ -26,6 +88,7 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
+
               onPressed: () {
                 // TODO: Implement login logic
               },
@@ -37,3 +100,20 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
+              onPressed: login,
+              child: Text('Login'),
+            ),
+            SizedBox(height: 16.0),
+            // Add a sign-up button
+            ElevatedButton(
+              onPressed: navigateToRegisterScreen,
+              child: Text('Sign Up'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
