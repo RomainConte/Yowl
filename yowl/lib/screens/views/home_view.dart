@@ -27,6 +27,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Posts'),
+        automaticallyImplyLeading: false,
       ),
       body: FutureBuilder<List<dynamic>>(
         future: fetchUsers(),
