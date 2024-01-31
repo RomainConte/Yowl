@@ -21,7 +21,7 @@ class App extends StatelessWidget {
       home: LoginScreen(),
       initialRoute: '/',
       routes: {
-        // '/search': (context) => const SearchView(),
+       
         '/profile_other': (context) {
           final Map<String, dynamic> user = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
           return OtherProfilePage(user: user);
