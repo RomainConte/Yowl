@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+
 
 import 'package:http/http.dart' as http;
 import 'package:yowl/screens/home_screen.dart';
@@ -89,17 +89,6 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 16.0),
             ElevatedButton(
 
-              onPressed: () {
-                // TODO: Implement login logic
-              },
-              child: Text('Login'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
               onPressed: login,
               child: Text('Login'),

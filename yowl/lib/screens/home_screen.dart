@@ -6,7 +6,7 @@ import 'package:yowl/screens/views/totem_view.dart';
 import 'package:yowl/screens/views/plus_view.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen ({Key? key}) : super(key: key);
+  const HomeScreen ({Key? key,}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
