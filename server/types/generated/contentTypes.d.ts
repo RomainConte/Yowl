@@ -469,6 +469,7 @@ export interface ApiPostPost extends Schema.CollectionType {
       'oneToMany',
       'api::commentaire.commentaire'
     >;
+    image_url: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<'api::post.post', 'oneToOne', 'admin::user'> &
@@ -837,7 +838,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToMany',
       'api::post.post'
     >;
-    pp: Attribute.Media;
     naissance: Attribute.Date;
     posts_liked: Attribute.Relation<
       'plugin::users-permissions.user',
@@ -862,6 +862,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToMany',
       'plugin::users-permissions.user'
     >;
+    pp_url: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

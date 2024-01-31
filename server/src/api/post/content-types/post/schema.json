@@ -40,6 +40,9 @@
       "relation": "oneToMany",
       "target": "api::commentaire.commentaire",
       "mappedBy": "post"
+    },
+    "image_url": {
+      "type": "text"
     }
   }
 }
