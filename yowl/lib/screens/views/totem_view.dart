@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:yowl/static.dart';
 
 class TotemView extends StatelessWidget {
   const TotemView({Key? key});
 
   Future<List<dynamic>> fetchAnimals() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:1337/api/animals/1'));
+    final response =
+        await http.get(Uri.parse('http://$ipAdress/api/animals/1'));
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);

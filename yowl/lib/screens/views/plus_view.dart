@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:yowl/static.dart';
+
 class PlusView extends StatefulWidget {
   final int userId;
   const PlusView({Key? key, required this.userId}) : super(key: key);
@@ -15,7 +17,7 @@ class _PlusViewState extends State<PlusView> {
   TextEditingController captionController = TextEditingController();
 
   Future<void> _handlePublishButtonPress() async {
-    final url = Uri.parse('http://10.0.2.2:1337/api/posts?populate=*');
+    final url = Uri.parse('http://$ipAdress/api/posts?populate=*');
 
     final Map<String, String> requestData = {
       'image_url': imageUrlController.text,
@@ -28,7 +30,9 @@ class _PlusViewState extends State<PlusView> {
     final response = await http.post(
       url,
       body: requestBody,
-      headers: {"Content-Type": "application/json"}, // Set the content type header
+      headers: {
+        "Content-Type": "application/json"
+      }, // Set the content type header
     );
 
     if (response.statusCode == 200) {
