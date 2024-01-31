@@ -27,6 +27,8 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('WILDHUB'),
+        automaticallyImplyLeading: false,
+
       ),
       body: FutureBuilder<List<dynamic>>(
         future: fetchUsers(),
