@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="33c667a0-332c-40a7-bcb6-021cb4e1c16f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.tmp/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/server/.tmp/data.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/api/post/content-types/post/schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/api/post/content-types/post/schema.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/extensions/users-permissions/content-types/user/schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/extensions/users-permissions/content-types/user/schema.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/types/generated/contentTypes.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/types/generated/contentTypes.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/lib/screens/views/home_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/lib/screens/views/home_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +55,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
+    &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -78,8 +69,8 @@
     &quot;last_opened_file_path&quot;: &quot;/Users/nh/Desktop/Yowl&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;dart.settings&quot;,
     &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
-  }
-}</component>
+    }
+    }</component>
   <component name="RunManager" selected="Flutter.yowl">
     <configuration name="Yowl" type="DartTestRunConfigurationType" factoryName="Dart Test">
       <option name="filePath" value="$PROJECT_DIR$/yowl/lib/main.dart" />
