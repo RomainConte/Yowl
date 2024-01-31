@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:yowl/screens/home_screen.dart';
 import 'package:yowl/screens/register_screen.dart';
+import 'dart:convert';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -13,45 +15,66 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
 
   Future<void> login() async {
-    final url = Uri.parse('http://10.0.2.2:1337/api/auth/local');
-    final response = await http.post(
-      url,
-      body: {
-        'identifier': emailController.text,
-        'password': passwordController.text,
-      },
-    );
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      // Handle empty fields gracefully.
+      // You can show a message to the user or simply return.
+      return;
+    }
 
-    if (response.statusCode == 200) {
-      // Login successful, navigate to home page
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+    final url = Uri.parse('http://10.0.2.2:1337/api/auth/local');
+    try {
+      final response = await http.post(
+        url,
+        body: {
+          'identifier': emailController.text,
+          'password': passwordController.text,
+        },
       );
-    } else {
-      // Login failed, show error message
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Login Failed'),
-          content: Text('Invalid email or password'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('OK'),
-            ),
-          ],
-        ),
-      );
+
+      if (response.statusCode == 200) {
+  // Parse the response body to extract user ID
+  final Map<String, dynamic> responseData = json.decode(response.body);
+  final int userId = responseData['user']['id'];
+
+  // Pass the userId to the HomeScreen
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => HomeScreen(userId: userId)),
+  );
+      } else {
+        // Handle specific error cases here, e.g., invalid credentials.
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text('Login Failed'),
+            content: Text('Invalid email or password'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    } catch (e) {
+      // Handle network errors here.
+      print('Error: $e');
     }
   }
 
-  // Function to navigate to the RegisterScreen
   void navigateToRegisterScreen() {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => RegisterScreen()),
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -122,6 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ],
               ),
+
               SizedBox(height: 30),
               // Column(
               //   mainAxisAlignment: MainAxisAlignment.center,
@@ -182,3 +206,4 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 }
+

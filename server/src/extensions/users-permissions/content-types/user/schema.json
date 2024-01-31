@@ -71,17 +71,6 @@
       "target": "api::post.post",
       "mappedBy": "user"
     },
-    "pp": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "naissance": {
       "type": "date"
     },
@@ -117,6 +106,9 @@
       "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
       "inversedBy": "abonnes"
+    },
+    "pp_url": {
+      "type": "text"
     }
   }
 }
