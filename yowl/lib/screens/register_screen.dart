@@ -37,7 +37,10 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MyAppBar(),
-      body: Padding(
+      body: 
+      SingleChildScrollView(
+        child:
+      Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +90,7 @@ class RegisterScreen extends StatelessWidget {
                       ],
                     ),
                     child: TextField(
-                      controller: usernameController,
+                      controller: emailController,
                       decoration: const InputDecoration(
                         labelText: "Email",
                         contentPadding: EdgeInsets.all(10),
@@ -115,7 +118,7 @@ class RegisterScreen extends StatelessWidget {
                       ],
                     ),
                     child: TextField(
-                      controller: usernameController,
+                      controller: passwordController,
                       decoration: const InputDecoration(
                         labelText: "Mot de passe",
                         contentPadding: EdgeInsets.all(10),
@@ -143,7 +146,7 @@ class RegisterScreen extends StatelessWidget {
                       ],
                     ),
                     child: TextField(
-                      controller: usernameController,
+                      controller: birthdateController,
                       decoration: const InputDecoration(
                         labelText: "Date de naissance",
                         contentPadding: EdgeInsets.all(10),
@@ -180,6 +183,7 @@ class RegisterScreen extends StatelessWidget {
           // ],
         ),
       ),
+    )
     );
   }
 }
