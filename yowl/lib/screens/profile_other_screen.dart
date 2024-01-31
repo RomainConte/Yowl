@@ -33,7 +33,7 @@ int selectedIndex = 2;
                         child: Column(
                         children: <Widget>[
                           GestureDetector(
-                          onTap: () => Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> const HomeScreen()), (route) => false),
+                          // onTap: () => Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context)=> const HomeScreen()), (route) => false),
 
                           child: const Center(
                             child: Text(
