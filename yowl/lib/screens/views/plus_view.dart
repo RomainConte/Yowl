@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class PlusView extends StatefulWidget {
-  const PlusView({Key? key}) : super(key: key);
+  final int userId;
+  const PlusView({Key? key, required this.userId}) : super(key: key);
 
   @override
   _PlusViewState createState() => _PlusViewState();
@@ -14,11 +15,12 @@ class _PlusViewState extends State<PlusView> {
   TextEditingController captionController = TextEditingController();
 
   Future<void> _handlePublishButtonPress() async {
-    final url = Uri.parse('http://10.0.2.2:1337/api/posts');
+    final url = Uri.parse('http://10.0.2.2:1337/api/posts?populate=*');
 
     final Map<String, String> requestData = {
       'image_url': imageUrlController.text,
       'Contenu': captionController.text,
+      'user': widget.userId.toString(),
     };
 
     final requestBody = json.encode({"data": requestData});

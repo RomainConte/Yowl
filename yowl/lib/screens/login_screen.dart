@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:yowl/screens/home_screen.dart';
 import 'package:yowl/screens/register_screen.dart';
+import 'dart:convert';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -30,11 +31,15 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       if (response.statusCode == 200) {
-        // Login successful, navigate to home page
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => HomeScreen()),
-        );
+  // Parse the response body to extract user ID
+  final Map<String, dynamic> responseData = json.decode(response.body);
+  final int userId = responseData['user']['id'];
+
+  // Pass the userId to the HomeScreen
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => HomeScreen(userId: userId)),
+  );
       } else {
         // Handle specific error cases here, e.g., invalid credentials.
         showDialog(
