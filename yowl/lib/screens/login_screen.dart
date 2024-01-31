@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+
+class LoginScreen extends StatelessWidget {
+
 import 'package:http/http.dart' as http;
 import 'package:yowl/screens/home_screen.dart';
 import 'package:yowl/screens/register_screen.dart';
@@ -66,14 +69,18 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+
               controller: emailController,
+
               decoration: InputDecoration(
                 labelText: 'Email',
               ),
             ),
             SizedBox(height: 16.0),
             TextField(
+
               controller: passwordController,
+
               obscureText: true,
               decoration: InputDecoration(
                 labelText: 'Password',
@@ -81,6 +88,19 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
+
+              onPressed: () {
+                // TODO: Implement login logic
+              },
+              child: Text('Login'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
               onPressed: login,
               child: Text('Login'),
             ),
@@ -96,3 +116,4 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
