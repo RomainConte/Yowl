@@ -1,55 +1,97 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({Key? key});
-
-  Future<List<dynamic>> fetchUsers() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:1000/api/users'));
-
-    if (response.statusCode == 200) {
-      // Parse the JSON response as a List<dynamic> (assuming it's an array of users).
-      return json.decode(response.body);
-    } else {
-      throw Exception('Failed to load users');
-    }
-  }
+  const ProfileView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<dynamic>>(
-      future: fetchUsers(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          // Display a loading indicator while fetching data.
-          return CircularProgressIndicator();
-        } else if (snapshot.hasError) {
-          // Handle errors if any.
-          return Text('Error: ${snapshot.error}');
-        } else if (snapshot.hasData && snapshot.data!.isEmpty) {
-          // Handle the case where no data is available.
-          return Text('No data available');
-        } else if (snapshot.hasData) {
-          // Display the list of users as a ListView.
-          final userList = snapshot.data as List<dynamic>;
+    return Scaffold(
+      body: Column(
+        children: [
+          Container(
+            child: Image.asset(
+              'assets/ban.png',
+              width: 430,
+              height: 180,
+            ),
+          ),
+          SizedBox(height: 18),
+          Align(
+            alignment: Alignment.topRight,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16),
+              child: _ProfileInfoRow(),
+            ),
+          ),
+          Positioned(
+            left: 16,
+            bottom: 16,
+            child: Column(
+              children: [
+                SizedBox(
+                  width: 112,
+                  height: 112,
+                  child: Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: Colors.black,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('assets/photo de profil.png'),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'John Doe',
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-          return ListView.builder(
-            itemCount: userList.length,
-            itemBuilder: (context, index) {
-              final user = userList[index] as Map<String, dynamic>;
+class _ProfileInfoRow extends StatelessWidget {
+  const _ProfileInfoRow({Key? key}) : super(key: key);
 
-              return ListTile(
-                title: Text('Name: ${user['name']}'),
-                subtitle: Text('Email: ${user['email']}'),
-              );
-            },
-          );
-        } else {
-          // Handle other cases.
-          return Text('Something went wrong');
-        }
-      },
+  final int subscriberCount = 1000; // Nombre d'abonnés
+  final int pointCount = 500; // Nombre de points
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          '$subscriberCount Abonnés',
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        SizedBox(height: 10),
+        Text(
+          '$pointCount Points',
+          style: TextStyle(
+            fontSize: 16,
+          ),
+        ),
+      ],
     );
   }
 }
