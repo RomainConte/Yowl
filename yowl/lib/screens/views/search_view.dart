@@ -1,6 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+
+
+
+
 class SearchView extends StatefulWidget {
   const SearchView({Key? key}) : super(key: key);
 
@@ -87,8 +91,16 @@ class Profil extends StatelessWidget {
               final user = filteredUserList[index] as Map<String, dynamic>;
 
               return ListTile(
-                title: Text('Name: ${user['username']}'),
-                subtitle: Text('Email: ${user['email']}'),
+                leading: const CircleAvatar(
+                  backgroundImage: NetworkImage('https://images.pexels.com/photos/14803768/pexels-photo-14803768.jpeg'), // Remplacez par l'URL de l'image de profil de l'utilisateur si disponible
+                  radius: 20,
+                ),
+                title: Text( user['username']),
+                //je vais faire le lien vers la page profil other screen
+                onTap: () {
+                  Navigator.pushNamed(context, '/profile_other', arguments: user);
+                },
+
               );
             },
           );
