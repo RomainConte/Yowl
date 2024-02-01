@@ -181,7 +181,7 @@ class _HomeViewState extends State<HomeView> {
       if (isLiked) {
         // Unlike post
         final response = await http.put(
-          Uri.parse('http://10.0.2.2:1337/api/posts/$postId'),
+          Uri.parse('http://$ipAdress/api/posts/$postId'),
           headers: {
             'Content-Type': 'application/json',
           },
@@ -203,7 +203,7 @@ class _HomeViewState extends State<HomeView> {
       } else {
         // Like post
         final response = await http.put(
-          Uri.parse('http://10.0.2.2:1337/api/posts/$postId'),
+          Uri.parse('http://$ipAdress/api/posts/$postId'),
           headers: {
             'Content-Type': 'application/json',
           },
