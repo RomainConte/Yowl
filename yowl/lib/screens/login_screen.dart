@@ -117,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   )
                 ],
               ),
-              SizedBox(height: 50),
+              SizedBox(height: 25),
               Row(
                 children: [
                   Expanded(
