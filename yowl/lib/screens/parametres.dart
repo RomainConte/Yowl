@@ -116,7 +116,7 @@ class SettingsPage extends StatelessWidget {
                   leading: const Icon(Icons.info),
                   title: const Text('Conditions générales d\'utilisation'),
                   onTap: () {
-                    // Naviguer vers la page de mon compte
+                    Navigator.pushNamed(context, '/cgu');
                   },
                 ),
                 const Divider(
@@ -130,7 +130,7 @@ class SettingsPage extends StatelessWidget {
                   leading: const Icon(Icons.privacy_tip),
                   title: const Text('Politique de confidentialité'),
                   onTap: () {
-                    // Naviguer vers la page des paramètres de confidentialité
+                    Navigator.pushNamed(context, '/politique');
                   },
                 ),
                 const Divider(
