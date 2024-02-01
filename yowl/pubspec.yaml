@@ -24,6 +24,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  crypto: ^3.0.1
   cupertino_icons: ^1.0.2
   google_fonts: ^2.1.0
   timeago: ^3.6.1  # Ajout de la dépendance timeago
