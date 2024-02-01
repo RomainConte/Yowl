@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:yowl/screens/login_screen.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
+import 'package:yowl/static.dart';
+
 
 class RegisterScreen extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
@@ -8,26 +12,29 @@ class RegisterScreen extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController birthdateController = TextEditingController();
 
-  Future<void> register(BuildContext context) async {
-    final url = Uri.parse('http://10.0.2.2:1337/api/auth/local/register');
-    final response = await http.post(
-      url,
-      body: {
-        'username': usernameController.text,
-        'email': emailController.text,
-        'password': passwordController.text,
-        'naissance': birthdateController.text,
-        'confirmed': 'true'
-      },
-    );
+ // for the utf8.encode method
 
-     if (response.statusCode == 200) {
+Future<void> register(BuildContext context) async {
+  final url = Uri.parse('http://$ipAdress/api/auth/local/register');
+  
+  final response = await http.post(
+    url,
+    body: {
+      'username': usernameController.text,
+      'email': emailController.text,
+      'password': sha256.convert(utf8.encode(passwordController.text)).toString(),
+      'naissance': birthdateController.text,
+      'confirmed': 'true'
+    },
+  );
+
+    if (response.statusCode == 200) {
       // Login successful, navigate to home page
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => LoginScreen()),
       );
-    }  else {
+    } else {
       // Handle registration error
       // TODO: Show an error message to the user
     }
@@ -36,50 +43,164 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Register'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            TextField(
-              controller: usernameController,
-              decoration: InputDecoration(
-                labelText: 'Username',
-              ),
+        appBar: const MyAppBar(),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color.fromARGB(255, 202, 202, 202),
+                              blurRadius: 10,
+                              offset: Offset(0, 2.5),
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          controller: usernameController,
+                          decoration: const InputDecoration(
+                            labelText: "Nom d'utilisateur",
+                            contentPadding: EdgeInsets.all(10),
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: 50),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color.fromARGB(255, 202, 202, 202),
+                              blurRadius: 10,
+                              offset: Offset(0, 2.5),
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          controller: emailController,
+                          decoration: const InputDecoration(
+                            labelText: "Email",
+                            contentPadding: EdgeInsets.all(10),
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: 50),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color.fromARGB(255, 202, 202, 202),
+                              blurRadius: 10,
+                              offset: Offset(0, 2.5),
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          controller: passwordController,
+                          decoration: const InputDecoration(
+                            labelText: "Mot de passe",
+                            contentPadding: EdgeInsets.all(10),
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: 50),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color.fromARGB(255, 202, 202, 202),
+                              blurRadius: 10,
+                              offset: Offset(0, 2.5),
+                            ),
+                          ],
+                        ),
+                        child: TextField(
+                          controller: birthdateController,
+                          decoration: const InputDecoration(
+                            labelText: "Date de naissance",
+                            contentPadding: EdgeInsets.all(10),
+                            border: InputBorder.none,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: 50),
+                // Column(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Color.fromRGBO(241, 185, 28, 1),
+                            onPrimary: Colors.white,
+                            elevation: 3,
+                            maximumSize: const Size.fromWidth(200)),
+                        onPressed: () => register(context),
+                        child: Text('S\'inscrire'),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+              // ),
+              // ],
             ),
-            SizedBox(height: 16.0),
-            TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-              ),
-            ),
-            SizedBox(height: 16.0),
-            TextField(
-              controller: passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-              ),
-              obscureText: true,
-            ),
-            SizedBox(height: 16.0),
-            TextField(
-              controller: birthdateController,
-              decoration: InputDecoration(
-                labelText: 'Birthdate',
-              ),
-            ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () => register(context),
-              child: Text('Register'),
-            ),
-          ],
-        ),
-      ),
+          ),
+        ));
+  }
+}
+
+class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const MyAppBar({Key? key}) : super(key: key);
+  Size get preferredSize => const Size.fromHeight(100);
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      // backgroundColor: Colors.white,
+      title: const Text('S\'inscrire'),
+      centerTitle: true,
     );
   }
 }

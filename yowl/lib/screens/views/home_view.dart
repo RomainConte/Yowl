@@ -2,11 +2,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:yowl/static.dart';
 
 class HomeView extends StatefulWidget {
   final int userId;
 
-  const HomeView({Key? key, required this.userId}) : super(key: key);
+
 
   @override
   _HomeViewState createState() => _HomeViewState();
@@ -66,14 +67,7 @@ class _HomeViewState extends State<HomeView> {
         ),
         automaticallyImplyLeading: false,
       ),
-      body: posts == null
-          ? Center(child: CircularProgressIndicator())
-          : posts!.isEmpty
-          ? Center(child: Text('No data available'))
-          : ListView.builder(
-        itemCount: posts!.length,
-        itemBuilder: (context, index) {
-          final post = posts![index];
+
 
           if (post == null || post['attributes'] == null) {
             return SizedBox.shrink(); // Skip rendering if data is null
@@ -81,59 +75,6 @@ class _HomeViewState extends State<HomeView> {
 
           final Map<String, dynamic> postData = post['attributes'];
 
-          // Convert createdAt to DateTime
-          final DateTime createdAt = DateTime.parse(postData['createdAt']);
-
-          // Use 'pp_url' as the image for both profile and post
-          final ImageProvider<Object> profileImage =
-          postData['user']['data'][0]['attributes']['pp_url'] != null
-              ? NetworkImage(postData['user']['data'][0]['attributes']['pp_url'] as String)
-              : AssetImage('assets/default_profile_image.png') as ImageProvider<Object>;
-
-          final ImageProvider<Object> postImage =
-          postData['image_url'] != null && postData['image_url'] is String
-              ? NetworkImage(postData['image_url'] as String)
-              : profileImage;
-
-          final String postImageUrl =
-          postData['image_url'] != null && postData['image_url'] is String
-              ? postData['image_url'] as String
-              : '';
-
-          // Extract the likes data
-          final List<dynamic>? likesData = postData['likes']['data'];
-
-          // Get the IDs of users who liked the post
-          final List<int> likedUserIds =
-              likesData?.map<int>((like) => like['id'] as int).toList() ?? [];
-
-          // Check if the current user liked the post
-          final bool isLiked = likedUserIds.contains(currentUserId);
-
-          return Card(
-            margin: EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: profileImage,
-                  ),
-                  title: Text(
-                      '${postData['user']['data'][0]['attributes']['username'] ?? 'Unknown'}'),
-                  subtitle: Text('Posted ${timeago.format(createdAt, locale: 'fr')}'),
-                ),
-                postData['image_url'] != null && postData['image_url'] is String
-                    ? Image.network(
-                  postImageUrl,
-                  fit: BoxFit.cover,
-                  height: 300.0,
-                  errorBuilder: (context, error, stackTrace) {
-                    print('Image Error: $error');
-                    return SizedBox(
-                      height: 300.0,
-                      child: Center(
-                        child: Text('Image not available'),
                       ),
                     );
                   },
