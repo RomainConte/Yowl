@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yowl/screens/views/home_view.dart';
-import 'package:yowl/screens/views/search_view.dart';
 
 class OtherProfilePage extends StatefulWidget {
   final Map<String, dynamic> user;
@@ -13,8 +11,6 @@ class OtherProfilePage extends StatefulWidget {
 }
 
 class _OtherProfilePageState extends State<OtherProfilePage> {
-int selectedIndex = 2;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,22 +25,22 @@ int selectedIndex = 2;
                 builder: (BuildContext context) {
                   return SizedBox(
                     height: MediaQuery.of(context).size.height / 2,
-                    child: Padding(padding: const EdgeInsets.all(40.0),
-                        child: Column(
+                    child: Padding(
+                      padding: const EdgeInsets.all(40.0),
+                      child: Column(
                         children: <Widget>[
                           GestureDetector(
-
                             onTap: () {
-                      Navigator.pop(context);
-                      Navigator.pop(context);
-                      },
-                          child: const Center(
-                            child: Text(
-                              'Bloquer',
-                              style: TextStyle(fontSize: 28.0),
+                              Navigator.pop(context);
+                              Navigator.pop(context);
+                            },
+                            child: const Center(
+                              child: Text(
+                                'Bloquer',
+                                style: TextStyle(fontSize: 28.0),
+                              ),
                             ),
                           ),
-                        ),
                           const SizedBox(height: 40.0),
                           GestureDetector(
                             onTap: () {
@@ -52,14 +48,14 @@ int selectedIndex = 2;
                             },
                             child: const Center(
                               child: Text(
-                                'Menu Items 2',
+                                'Menu Item 2',
                                 style: TextStyle(fontSize: 28.0),
                               ),
                             ),
                           ),
                         ],
-                      )
-                    )
+                      ),
+                    ),
                   );
                 },
               );
@@ -67,22 +63,111 @@ int selectedIndex = 2;
           ),
         ],
       ),
-          body: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const CircleAvatar(
-                  backgroundImage: NetworkImage("https://images.pexels.com/photos/14803768/pexels-photo-14803768.jpeg"),
-                  radius: 50,
-                ),
-                const SizedBox(height: 16),
-                Text('Username: ${widget.user['username'] ?? ''}'),
-                const SizedBox(height: 8),
-                // Add more fields as needed
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              child: Image.network(
+                widget.user['banner_url'] ?? '',
+                width: 430,
+                height: 180,
+                fit: BoxFit.cover,
+              ),
             ),
+            const SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16, bottom: 16),
+                child: SizedBox(
+                  width: 112,
+                  height: 112,
+                  child: CircleAvatar(
+                    // Replace with actual image source
+                    backgroundImage: NetworkImage(widget.user['pp_url'] ?? ''),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: Text(
+                  widget.user['username'] ?? 'Username',
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: _ProfileInfoRow(), // Implement or replace this widget
+              ),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              'Derniers posts',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 10),
+            buildPostGrid(widget.user['posts']), // Implement or replace this function
+            const SizedBox(height: 10),
+            // Additional widgets or content can be added here
+          ],
+        ),
+      ),
+    );
+  }
+}
+class _ProfileInfoRow extends StatelessWidget {
+  const _ProfileInfoRow({Key? key}) : super(key: key);
+
+  final int subscriberCount = 1000; // Nombre d'abonnés
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Text(
+          '$subscriberCount Abonnés',
+          style: TextStyle(
+            fontSize: 16,
           ),
+        ),
+        SizedBox(height: 10),
+        
+      ],
+    );
+  }
+}
+
+  Widget buildPostGrid(List<dynamic> posts) {
+    return GridView.builder(
+      shrinkWrap: true,
+      physics:
+          NeverScrollableScrollPhysics(), // to disable GridView's scrolling
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3, // number of items per row
+        crossAxisSpacing: 4, // horizontal space between items
+        mainAxisSpacing: 4, // vertical space between items
+      ),
+      itemCount: posts.length,
+      itemBuilder: (context, index) {
+        return Image.network(
+          posts[index]['image_url'],
+          fit: BoxFit.cover,
         );
-      }
-    }
+      },
+    );
+  }

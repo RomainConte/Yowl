@@ -24,7 +24,7 @@ class SettingsPage extends StatelessWidget {
                   leading: const Icon(Icons.cookie),
                   title: const Text('Cookies'),
                   onTap: () {
-                    // Naviguer vers la page de mon compte
+
                   },
                 ),
                 const Divider(

@@ -174,6 +174,7 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
+
   Future<void> handleLike(int postId, bool isLiked) async {
     try {
       if (isLiked) {
@@ -256,3 +257,4 @@ class _LikeButtonState extends State<LikeButton> {
     );
   }
 }
+
