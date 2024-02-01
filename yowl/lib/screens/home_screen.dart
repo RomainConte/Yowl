@@ -43,7 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         controller: _pageController,
         children: <Widget>[
-          HomeView(), // Pass userId if needed
+          HomeView(userId: widget.userId), // Pass userId if needed
+
           SearchView(), // Pass userId if needed
           PlusView(userId: widget.userId), // Pass userId if needed
           TotemView(), // Pass userId if needed
