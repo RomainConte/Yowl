@@ -73,7 +73,7 @@ class _PlusViewState extends State<PlusView> {
                     child: TextFormField(
                       controller: imageUrlController,
                       decoration: InputDecoration(
-                        labelText: 'Image',
+                        labelText: 'Lien de l\'image',
                         contentPadding: EdgeInsets.all(10),
                         border: InputBorder.none,
                       ),
@@ -112,7 +112,7 @@ class _PlusViewState extends State<PlusView> {
             ),
             SizedBox(height: 30),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 SizedBox(
                   child: ElevatedButton(
