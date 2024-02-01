@@ -4,23 +4,57 @@ import 'package:http/http.dart' as http;
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:yowl/static.dart';
 
-class HomeView extends StatelessWidget {
-  const HomeView({Key? key});
+class HomeView extends StatefulWidget {
+  final int userId;
 
-  Future<List<dynamic>> fetchUsers() async {
-    final response =
-        await http.get(Uri.parse('http://$ipAdress/api/posts?populate=*'));
 
-    if (response.statusCode == 200) {
-      final responseData = json.decode(response.body);
 
-      if (responseData.containsKey('data')) {
-        return List<dynamic>.from(responseData['data']);
+  @override
+  _HomeViewState createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  late int currentUserId;
+  late String currentUserUsername;
+  List<dynamic>? posts;
+
+  @override
+  void initState() {
+    super.initState();
+    currentUserId = widget.userId;
+    fetchPosts(currentUserId);
+  }
+
+  Future<void> fetchPosts(int userId) async {
+    print('Fetching posts for userId: $userId');
+
+    try {
+      final response = await http.get(
+        Uri.parse('http://10.0.2.2:1337/api/posts?populate=*&userId=$userId'),
+      );
+
+      print('Response: ${response.body}');
+
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+
+        if (responseData is Map<String, dynamic> && responseData.containsKey('data')) {
+          setState(() {
+            posts = List<dynamic>.from(responseData['data']);
+          });
+
+          // Récupérer le nom d'utilisateur à partir du premier post (s'il y a des posts)
+          if (responseData['data'].isNotEmpty) {
+            currentUserUsername = responseData['data'][0]['attributes']['user']['data'][0]['attributes']['username'];
+          }
+        } else {
+          print('Invalid response format: $responseData');
+        }
       } else {
-        throw Exception('Expected key "data" not found in response');
+        print('Failed to load posts');
       }
-    } else {
-      throw Exception('Failed to load users');
+    } catch (e) {
+      print('Error fetching posts: $e');
     }
   }
 
@@ -28,127 +62,138 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('WILDHUB'),
+        title: Center(
+          child: Text('WILDHUB'),
+        ),
         automaticallyImplyLeading: false,
       ),
-      body: FutureBuilder<List<dynamic>>(
-        future: fetchUsers(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (snapshot.hasData && snapshot.data!.isEmpty) {
-            return Center(child: Text('No data available'));
-          } else if (snapshot.hasData) {
-            final userList = snapshot.data as List<dynamic>;
 
-            return ListView.builder(
-              itemCount: userList.length,
-              itemBuilder: (context, index) {
-                if (userList[index] == null ||
-                    userList[index]['attributes'] == null) {
-                  return SizedBox.shrink(); // Skip rendering if data is null
-                }
 
-                final Map<String, dynamic> user = userList[index]['attributes'];
-
-                // Convert createdAt to DateTime
-                final DateTime createdAt = DateTime.parse(user['createdAt']);
-
-                // Use 'pp_url' as the image for both profile and post
-                final ImageProvider<Object> profileImage =
-                    user['user']['data'][0]['attributes']['pp_url'] != null
-                        ? NetworkImage(user['user']['data'][0]['attributes']
-                            ['pp_url'] as String)
-                        : AssetImage('assets/default_profile_image.png')
-                            as ImageProvider<Object>;
-
-                final ImageProvider<Object> postImage =
-                    user['image_url'] != null && user['image_url'] is String
-                        ? NetworkImage(user['image_url'] as String)
-                        : profileImage;
-
-                final String postImageUrl =
-                    user['image_url'] != null && user['image_url'] is String
-                        ? user['image_url'] as String
-                        : '';
-
-                return Card(
-                  margin: EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: profileImage,
-                        ),
-                        title: Text(
-                            '${user['user']['data'][0]['attributes']['username'] ?? 'Unknown'}'),
-                        subtitle: Text(
-                            'Posted ${timeago.format(createdAt, locale: 'fr')}'),
-                      ),
-                      user['image_url'] != null && user['image_url'] is String
-                          ? Image.network(
-                              postImageUrl,
-                              fit: BoxFit.cover,
-                              height: 300.0,
-                              errorBuilder: (context, error, stackTrace) {
-                                print('Image Error: $error');
-                                return SizedBox(
-                                  height: 300.0,
-                                  child: Center(
-                                    child: Text('Image not available'),
-                                  ),
-                                );
-                              },
-                            )
-                          : SizedBox(height: 0),
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          '${user['Contenu'] ?? 'No content'}',
-                          style: TextStyle(fontSize: 16.0),
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: Icon(Icons.favorite),
-                                color: Colors.red,
-                                onPressed: () {
-                                  print('Like button pressed');
-                                },
-                              ),
-                              // You can add a counter here if needed
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: Icon(Icons.chat_bubble_outline),
-                                onPressed: () {
-                                  print('Comment button pressed');
-                                },
-                              ),
-                              // You can add a counter here if needed
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              },
-            );
-          } else {
-            return Center(child: Text('Something went wrong'));
+          if (post == null || post['attributes'] == null) {
+            return SizedBox.shrink(); // Skip rendering if data is null
           }
+
+          final Map<String, dynamic> postData = post['attributes'];
+
+                      ),
+                    );
+                  },
+                )
+                    : SizedBox(height: 0),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    '${postData['Contenu'] ?? 'No content'}',
+                    style: TextStyle(fontSize: 16.0),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    LikeButton(
+                      likes: likesData,
+                      isLiked: isLiked,
+                      onLike: () => handleLike(post['id'], isLiked),
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.chat_bubble_outline),
+                          onPressed: () {
+                            print('Comment button pressed');
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
         },
       ),
+    );
+  }
+
+  Future<void> handleLike(int postId, bool isLiked) async {
+    try {
+      if (isLiked) {
+        // Unlike post
+        final response = await http.put(
+          Uri.parse('http://10.0.2.2:1337/api/posts/$postId'),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: json.encode({
+            'data': {
+              'likes': [], // Envoyer un tableau vide pour supprimer tous les likes
+            },
+          }),
+        );
+
+        print('Response for post $postId unlike: ${response.statusCode} - ${response.body}');
+
+        if (response.statusCode == 200) {
+          print('Post $postId unliked by user $currentUserId');
+          fetchPosts(currentUserId);
+        } else {
+          print('Failed to unlike post $postId. Status code: ${response.statusCode}');
+        }
+      } else {
+        // Like post
+        final response = await http.put(
+          Uri.parse('http://10.0.2.2:1337/api/posts/$postId'),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: json.encode({
+            'data': {
+              'likes': [
+                {
+                  'id': currentUserId,
+                  'username': currentUserUsername,
+                }
+              ],
+            },
+          }),
+        );
+
+        print('Response for post $postId like: ${response.statusCode} - ${response.body}');
+
+        if (response.statusCode == 200) {
+          print('Post $postId liked by user $currentUserId');
+          fetchPosts(currentUserId);
+        } else {
+          print('Failed to like post $postId. Status code: ${response.statusCode}');
+        }
+      }
+    } catch (e) {
+      print('Failed to handle like/unlike for post $postId. Error: $e');
+    }
+  }
+}
+
+class LikeButton extends StatefulWidget {
+  final List<dynamic>? likes;
+  final bool isLiked;
+  final VoidCallback onLike;
+
+  const LikeButton({Key? key, this.likes, required this.isLiked, required this.onLike})
+      : super(key: key);
+
+  @override
+  _LikeButtonState createState() => _LikeButtonState();
+}
+
+class _LikeButtonState extends State<LikeButton> {
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        widget.isLiked ? Icons.favorite : Icons.favorite_border,
+        color: widget.isLiked ? Colors.red : null,
+      ),
+      onPressed: widget.onLike,
     );
   }
 }
