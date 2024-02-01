@@ -92,9 +92,8 @@ class Profil extends StatelessWidget {
               final user = filteredUserList[index] as Map<String, dynamic>;
 
               return ListTile(
-                leading: const CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://images.pexels.com/photos/14803768/pexels-photo-14803768.jpeg'), // Remplacez par l'URL de l'image de profil de l'utilisateur si disponible
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(user['pp_url'] as String),
                   radius: 20,
                 ),
                 title: Text(user['username']),
