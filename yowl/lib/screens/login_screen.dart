@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:yowl/screens/home_screen.dart';
 import 'package:yowl/screens/register_screen.dart';
 import 'dart:convert';
+import 'package:crypto/crypto.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
         url,
         body: {
           'identifier': emailController.text,
-          'password': passwordController.text,
+          'password': sha256.convert(utf8.encode(passwordController.text)).toString(),
         },
       );
 

@@ -29,13 +29,6 @@
       "type": "string",
       "configurable": false
     },
-    "password": {
-      "type": "password",
-      "minLength": 6,
-      "configurable": false,
-      "private": true,
-      "searchable": false
-    },
     "resetPasswordToken": {
       "type": "string",
       "configurable": false,
@@ -64,6 +57,11 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
+    },
+    "password": {
+      "type": "password",
+      "private": true,
+      "searchable": false
     },
     "posts": {
       "type": "relation",

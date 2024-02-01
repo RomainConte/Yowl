@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:yowl/screens/login_screen.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 
 class RegisterScreen extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
@@ -8,18 +10,21 @@ class RegisterScreen extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController birthdateController = TextEditingController();
 
-  Future<void> register(BuildContext context) async {
-    final url = Uri.parse('http://10.0.2.2:1337/api/auth/local/register');
-    final response = await http.post(
-      url,
-      body: {
-        'username': usernameController.text,
-        'email': emailController.text,
-        'password': passwordController.text,
-        'naissance': birthdateController.text,
-        'confirmed': 'true'
-      },
-    );
+ // for the utf8.encode method
+
+Future<void> register(BuildContext context) async {
+  final url = Uri.parse('http://10.0.2.2:1337/api/auth/local/register');
+  
+  final response = await http.post(
+    url,
+    body: {
+      'username': usernameController.text,
+      'email': emailController.text,
+      'password': sha256.convert(utf8.encode(passwordController.text)).toString(),
+      'naissance': birthdateController.text,
+      'confirmed': 'true'
+    },
+  );
 
     if (response.statusCode == 200) {
       // Login successful, navigate to home page
