@@ -3,11 +3,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({Key? key}) : super(key: key);
-
+  final int userId;
+  const ProfileView({Key? key, required this.userId}) : super(key: key);
   Future<List<dynamic>> fetchUsers() async {
     final response =
-        await http.get(Uri.parse('http://10.0.2.2:1337/api/users?populate=*'));
+        await http.get(Uri.parse('http://10.0.2.2:1337/api/users/$userId'));
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
@@ -22,7 +22,7 @@ class ProfileView extends StatelessWidget {
     }
   }
 
-final int nameProfile = 
+
 
   @override
   Widget build(BuildContext context) {

@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SearchView(), // Pass userId if needed
           PlusView(userId: widget.userId), // Pass userId if needed
           TotemView(), // Pass userId if needed
-          ProfileView(), // Pass userId to ProfileView
+          ProfileView(userId: widget.userId), // Pass userId to ProfileView
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
