@@ -5,28 +5,28 @@ import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:yowl/static.dart';
 
-
 class RegisterScreen extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController birthdateController = TextEditingController();
 
- // for the utf8.encode method
+  // for the utf8.encode method
 
-Future<void> register(BuildContext context) async {
-  final url = Uri.parse('http://$ipAdress/api/auth/local/register');
-  
-  final response = await http.post(
-    url,
-    body: {
-      'username': usernameController.text,
-      'email': emailController.text,
-      'password': sha256.convert(utf8.encode(passwordController.text)).toString(),
-      'naissance': birthdateController.text,
-      'confirmed': 'true'
-    },
-  );
+  Future<void> register(BuildContext context) async {
+    final url = Uri.parse('http://$ipAdress/api/auth/local/register');
+
+    final response = await http.post(
+      url,
+      body: {
+        'username': usernameController.text,
+        'email': emailController.text,
+        'password':
+            sha256.convert(utf8.encode(passwordController.text)).toString(),
+        'naissance': birthdateController.text,
+        'confirmed': 'true'
+      },
+    );
 
     if (response.statusCode == 200) {
       // Login successful, navigate to home page
@@ -78,7 +78,7 @@ Future<void> register(BuildContext context) async {
                     )
                   ],
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 25),
                 Row(
                   children: [
                     Expanded(
@@ -106,7 +106,7 @@ Future<void> register(BuildContext context) async {
                     )
                   ],
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 25),
                 Row(
                   children: [
                     Expanded(
@@ -124,6 +124,7 @@ Future<void> register(BuildContext context) async {
                         ),
                         child: TextField(
                           controller: passwordController,
+                          obscureText: true,
                           decoration: const InputDecoration(
                             labelText: "Mot de passe",
                             contentPadding: EdgeInsets.all(10),
@@ -134,7 +135,7 @@ Future<void> register(BuildContext context) async {
                     )
                   ],
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 25),
                 Row(
                   children: [
                     Expanded(
@@ -154,6 +155,7 @@ Future<void> register(BuildContext context) async {
                           controller: birthdateController,
                           decoration: const InputDecoration(
                             labelText: "Date de naissance",
+                            hintText: "AAAA-MM-JJ",
                             contentPadding: EdgeInsets.all(10),
                             border: InputBorder.none,
                           ),
@@ -162,7 +164,7 @@ Future<void> register(BuildContext context) async {
                     )
                   ],
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: 30),
                 // Column(
                 //   mainAxisAlignment: MainAxisAlignment.center,
                 //   crossAxisAlignment: CrossAxisAlignment.center,
