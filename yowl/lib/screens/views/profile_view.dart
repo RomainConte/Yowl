@@ -22,7 +22,7 @@ class ProfileView extends StatelessWidget {
     }
   }
 
-final int nameProfile = 
+final int nameProfile = 1; // Nom du profil
 
   @override
   Widget build(BuildContext context) {
