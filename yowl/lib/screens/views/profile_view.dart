@@ -26,8 +26,8 @@ class _ProfileViewState extends State<ProfileView> {
 Widget buildPostGrid(List<dynamic> posts) {
   return GridView.builder(
     shrinkWrap: true,
-    physics: NeverScrollableScrollPhysics(), // to disable GridView's scrolling
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    physics: const NeverScrollableScrollPhysics(), // to disable GridView's scrolling
+    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 3, // number of items per row
       crossAxisSpacing: 4, // horizontal space between items
       mainAxisSpacing: 4, // vertical space between items
@@ -44,11 +44,58 @@ Widget buildPostGrid(List<dynamic> posts) {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return SizedBox(
+                      height: MediaQuery.of(context).size.height / 2,
+                      child: Padding(padding: const EdgeInsets.all(40.0),
+                          child: Column(
+                            children: <Widget>[
+                              GestureDetector(
+
+                                onTap: () {
+                                  Navigator.pushNamed(context, "/paramètres");
+                                },
+                                child: const Center(
+                                  child: Text(
+                                    'Paramètres',
+                                    style: TextStyle(fontSize: 28.0),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 40.0),
+                              GestureDetector(
+                                onTap: () {
+                                  print('Menu Item 2 clicked');
+                                },
+                                child: const Center(
+                                  child: Text(
+                                    'Menu Items 2',
+                                    style: TextStyle(fontSize: 28.0),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                      )
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
       body: FutureBuilder<Map<String, dynamic>>(
         future: fetchUser(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
@@ -56,22 +103,20 @@ Widget buildPostGrid(List<dynamic> posts) {
             final ImageProvider<Object> profileImage =
                     user['pp_url'] != null
                         ? NetworkImage(user['pp_url'] as String)
-                        : AssetImage('../../../assets/photo de profil.png')
+                        : const AssetImage('../../../assets/photo de profil.png')
                             as ImageProvider<Object>;
             final ImageProvider<Object> bannerImage =
                     user['banner_url'] != null
                         ? NetworkImage(user['banner_url'] as String)
-                        : AssetImage('../../../assets/banner.png')
+                        : const AssetImage('../../../assets/banner.png')
                             as ImageProvider<Object>;
             return Column(
               children: [
-                Container(
-                  child: Image.network(
-                    user['banner_url'],
-                    width: 430,
-                    height: 180,
-                    fit: BoxFit.cover,
-                  ),
+                Image.network(
+                  user['banner_url'],
+                  width: 430,
+                  height: 180,
+                  fit: BoxFit.cover,
                 ),
                 const SizedBox(height: 10),
                 Align(
@@ -113,15 +158,15 @@ Widget buildPostGrid(List<dynamic> posts) {
                     ),
                   ),
                 ),
-                Align(
+                const Align(
                   alignment: Alignment.topRight,
                   child: Padding(
-                    padding: const EdgeInsets.only(right: 16),
+                    padding: EdgeInsets.only(right: 16),
                     child: _ProfileInfoRow(),
                   ),
                 ),
                 const SizedBox(height: 10),
-          Text(
+          const Text(
   'Derniers posts',
   style: TextStyle(
     fontSize: 20,
@@ -131,7 +176,7 @@ Widget buildPostGrid(List<dynamic> posts) {
 const SizedBox(height: 10),
 buildPostGrid(user['posts']),
           const SizedBox(height: 10),
-          Row(
+          const Row(
             children: [
               
 
@@ -140,7 +185,7 @@ buildPostGrid(user['posts']),
               ],
             );
           } else {
-            return Center(child: Text('No user found'));
+            return const Center(child: Text('No user found'));
           }
         },
       ),
@@ -161,11 +206,11 @@ class _ProfileInfoRow extends StatelessWidget {
       children: [
         Text(
           '$subscriberCount Abonnés',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         
       ],
     );

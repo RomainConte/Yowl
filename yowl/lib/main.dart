@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:yowl/screens/home_screen.dart';
+import 'package:yowl/screens/parametres.dart';
 import 'package:yowl/screens/profile_other_screen.dart';
 // import 'package:yowl/screens/views/search_view.dart';
 import 'package:yowl/screens/login_screen.dart';
@@ -21,7 +22,8 @@ class App extends StatelessWidget {
       home: LoginScreen(),
       initialRoute: '/',
       routes: {
-       
+        '/cgu' 
+        '/paramètres': (context) => const SettingsPage(),
         '/profile_other': (context) {
           final Map<String, dynamic> user = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
           return OtherProfilePage(user: user);
