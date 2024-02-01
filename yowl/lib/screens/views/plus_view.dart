@@ -47,36 +47,107 @@ class _PlusViewState extends State<PlusView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Create Post'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      appBar: const MyAppBar(),
+      body: SingleChildScrollView(
+        // child: Padding(
+        //   padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextFormField(
-              controller: imageUrlController,
-              decoration: InputDecoration(
-                labelText: 'Image',
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color.fromARGB(255, 202, 202, 202),
+                          blurRadius: 10,
+                          offset: Offset(0, 2.5),
+                        ),
+                      ],
+                    ),
+                    child: TextFormField(
+                      controller: imageUrlController,
+                      decoration: InputDecoration(
+                        labelText: 'Lien de l\'image',
+                        contentPadding: EdgeInsets.all(10),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 16.0),
-            TextFormField(
-              controller: captionController,
-              decoration: InputDecoration(
-                labelText: 'Caption',
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color.fromARGB(255, 202, 202, 202),
+                          blurRadius: 10,
+                          offset: Offset(0, 2.5),
+                        ),
+                      ],
+                    ),
+                    child: TextFormField(
+                      controller: captionController,
+                      decoration: InputDecoration(
+                        labelText: 'Légende',
+                        contentPadding: EdgeInsets.all(10),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                _handlePublishButtonPress();
-              },
-              child: Text('Publish'),
+            SizedBox(height: 30),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                SizedBox(
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(241, 185, 28, 1),
+                        onPrimary: Colors.white,
+                        elevation: 3,
+                        maximumSize: const Size.fromWidth(200)),
+                    onPressed: () {
+                      _handlePublishButtonPress();
+                    },
+                    child: Text('Publier'),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
       ),
+    );
+    // );
+  }
+}
+
+class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const MyAppBar({Key? key}) : super(key: key);
+
+  @override
+  Size get preferredSize => const Size.fromHeight(60);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: const Text('Nouvelle publication'),
+      centerTitle: true,
     );
   }
 }
