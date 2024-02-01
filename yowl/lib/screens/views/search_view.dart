@@ -1,9 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-
-
-
+import 'package:yowl/static.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({Key? key}) : super(key: key);
@@ -43,8 +41,7 @@ class _SearchViewState extends State<SearchView> {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0)),
             ),
-
-            ), // Ajoutez cette ligne
+          ), // Ajoutez cette ligne
           onChanged: (value) {
             setState(() {});
           },
@@ -61,7 +58,7 @@ class Profil extends StatelessWidget {
   final String searchText;
 
   Future<List<dynamic>> fetchUsers() async {
-    final response = await http.get(Uri.parse('http://10.0.2.2:1337/api/users'));
+    final response = await http.get(Uri.parse('http://$ipAdress/api/users'));
 
     if (response.statusCode == 200) {
       return json.decode(response.body);
@@ -83,7 +80,11 @@ class Profil extends StatelessWidget {
           return const Text('No data available');
         } else if (snapshot.hasData) {
           final userList = snapshot.data as List<dynamic>;
-          final filteredUserList = userList.where((user) => user['username'].toLowerCase().contains(searchText.toLowerCase())).toList();
+          final filteredUserList = userList
+              .where((user) => user['username']
+                  .toLowerCase()
+                  .contains(searchText.toLowerCase()))
+              .toList();
 
           return ListView.builder(
             itemCount: filteredUserList.length,
@@ -92,15 +93,16 @@ class Profil extends StatelessWidget {
 
               return ListTile(
                 leading: const CircleAvatar(
-                  backgroundImage: NetworkImage('https://images.pexels.com/photos/14803768/pexels-photo-14803768.jpeg'), // Remplacez par l'URL de l'image de profil de l'utilisateur si disponible
+                  backgroundImage: NetworkImage(
+                      'https://images.pexels.com/photos/14803768/pexels-photo-14803768.jpeg'), // Remplacez par l'URL de l'image de profil de l'utilisateur si disponible
                   radius: 20,
                 ),
-                title: Text( user['username']),
+                title: Text(user['username']),
                 //je vais faire le lien vers la page profil other screen
                 onTap: () {
-                  Navigator.pushNamed(context, '/profile_other', arguments: user);
+                  Navigator.pushNamed(context, '/profile_other',
+                      arguments: user);
                 },
-
               );
             },
           );

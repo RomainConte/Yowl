@@ -5,6 +5,8 @@ import 'package:yowl/screens/register_screen.dart';
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 
+import 'package:yowl/static.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -21,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
       return;
     }
 
-    final url = Uri.parse('http://10.0.2.2:1337/api/auth/local');
+    final url = Uri.parse('http://$ipAdress/api/auth/local');
     try {
       final response = await http.post(
         url,
@@ -32,15 +34,15 @@ class _LoginScreenState extends State<LoginScreen> {
       );
 
       if (response.statusCode == 200) {
-  // Parse the response body to extract user ID
-  final Map<String, dynamic> responseData = json.decode(response.body);
-  final int userId = responseData['user']['id'];
+        // Parse the response body to extract user ID
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        final int userId = responseData['user']['id'];
 
-  // Pass the userId to the HomeScreen
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(builder: (context) => HomeScreen(userId: userId)),
-  );
+        // Pass the userId to the HomeScreen
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen(userId: userId)),
+        );
       } else {
         // Handle specific error cases here, e.g., invalid credentials.
         showDialog(
@@ -82,7 +84,6 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: const MyAppBar(),
       body: SingleChildScrollView(
-        
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -206,4 +207,3 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 }
-
