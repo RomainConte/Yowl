@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:yowl/static.dart';
+
 class ProfileView extends StatefulWidget {
   final int userId;
   const ProfileView({Key? key, required this.userId}) : super(key: key);
@@ -13,7 +15,7 @@ class ProfileView extends StatefulWidget {
 class _ProfileViewState extends State<ProfileView> {
   Future<Map<String, dynamic>> fetchUser() async {
     final response = await http.get(Uri.parse(
-        'http://10.0.2.2:1337/api/users/${widget.userId}?populate=*'));
+        'http://$ipAdress/api/users/${widget.userId}?populate=*'));
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
