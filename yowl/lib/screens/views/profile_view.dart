@@ -12,16 +12,18 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   Future<Map<String, dynamic>> fetchUser() async {
-  final response =
-      await http.get(Uri.parse('http://10.0.2.2:1337/api/users/${widget.userId}?populate=*'));
+    final response = await http.get(Uri.parse(
+        'http://10.0.2.2:1337/api/users/${widget.userId}?populate=*'));
 
-  if (response.statusCode == 200) {
-    final responseData = json.decode(response.body);
-    
-    return Map<String, dynamic>.from(responseData);
-  } else {
-    throw Exception('Failed to load user');
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+
+      return Map<String, dynamic>.from(responseData);
+    } else {
+      throw Exception('Failed to load user');
+    }
   }
+
 }
 Widget buildPostGrid(List<dynamic> posts) {
   return GridView.builder(
@@ -41,6 +43,7 @@ Widget buildPostGrid(List<dynamic> posts) {
     },
   );
 }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,6 +103,7 @@ Widget buildPostGrid(List<dynamic> posts) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
             final user = snapshot.data!;
+
             final ImageProvider<Object> profileImage =
                     user['pp_url'] != null
                         ? NetworkImage(user['pp_url'] as String)
@@ -110,6 +114,7 @@ Widget buildPostGrid(List<dynamic> posts) {
                         ? NetworkImage(user['banner_url'] as String)
                         : const AssetImage('../../../assets/banner.png')
                             as ImageProvider<Object>;
+
             return Column(
               children: [
                 Image.network(
@@ -166,6 +171,7 @@ Widget buildPostGrid(List<dynamic> posts) {
                   ),
                 ),
                 const SizedBox(height: 10),
+
           const Text(
   'Derniers posts',
   style: TextStyle(
@@ -182,6 +188,7 @@ buildPostGrid(user['posts']),
 
             ],
           ),
+
               ],
             );
           } else {
@@ -198,7 +205,6 @@ class _ProfileInfoRow extends StatelessWidget {
 
   final int subscriberCount = 1000; // Nombre d'abonnés
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -210,31 +216,10 @@ class _ProfileInfoRow extends StatelessWidget {
             fontSize: 16,
           ),
         ),
+
         const SizedBox(height: 10),
         
       ],
-    );
-  }
-}
-
-class _TrophyWidget extends StatelessWidget {
-  const _TrophyWidget({
-    Key? key,
-    required this.trophyImage,
-  }) : super(key: key);
-
-  final ImageProvider trophyImage;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 400,
-      height: 150,
-      decoration: BoxDecoration(
-        color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Image(image: trophyImage),
     );
   }
 }

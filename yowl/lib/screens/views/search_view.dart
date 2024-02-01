@@ -58,7 +58,7 @@ class Profil extends StatelessWidget {
   final String searchText;
 
   Future<List<dynamic>> fetchUsers() async {
-    final response = await http.get(Uri.parse('http://$ipAdress/api/users'));
+    final response = await http.get(Uri.parse('http://$ipAdress/api/users?populate=*'));
 
     if (response.statusCode == 200) {
       return json.decode(response.body);
