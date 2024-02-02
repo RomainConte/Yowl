@@ -63,7 +63,7 @@ class Profil extends StatelessWidget {
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      throw Exception('Eurreur de chargement des utilisateurs');
+      throw Exception('Erreur de chargement des utilisateurs');
     }
   }
 
