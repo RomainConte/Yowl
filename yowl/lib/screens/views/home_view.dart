@@ -62,9 +62,25 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-          child: Text('WILDHUB'),
-        ),
+
+        leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+          child: Container(
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Colors.white,
+              ),
+              height: 20,
+              width: 20,
+              child: Image.asset(
+              'assets/logo_wild.png',
+              fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        title: Text('WILDHUB'),
+        centerTitle: true,
+
         automaticallyImplyLeading: false,
       ),
       body: posts == null
