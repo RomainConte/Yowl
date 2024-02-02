@@ -201,12 +201,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-<<<<<<< HEAD
       automaticallyImplyLeading: false, // Ajoutez cette ligne
-
-=======
-      automaticallyImplyLeading: false,
->>>>>>> c7054d18d70a6a5778eacf7daa8a10195d2e3891
       // backgroundColor: Colors.white,
       title: const Text('Se connecter'),
       centerTitle: true,
