@@ -76,6 +76,21 @@ class _ProfileViewState extends State<ProfileView> {
                               const SizedBox(height: 40.0),
                               GestureDetector(
                                 onTap: () {
+
+                                  Navigator.pushNamed(context, "/edit_profile",
+                                      arguments: widget.userId);
+                                },
+                                child: const Center(
+                                  child: Text(
+                                    'Modifier le profil',
+                                    style: TextStyle(fontSize: 28.0),
+                                     ),
+                                ),
+                              ),
+
+                                    const SizedBox(height: 40.0),
+                              GestureDetector(
+                                onTap: () {
                                   Navigator.pushNamed(context, "/login");
                                 },
                                 child: const Center(
@@ -83,6 +98,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     'Se déconnecter',
 
                                     style: TextStyle(fontSize: 28.0, color: Colors.red),
+
 
                                   ),
                                 ),
@@ -106,7 +122,8 @@ class _ProfileViewState extends State<ProfileView> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
             final user = snapshot.data!;
-            final ImageProvider<Object> profileImage = user['pp_url'] != null
+            final ImageProvider<Object> profileImage = user['pp_url']
+             != null
                 ? NetworkImage(user['pp_url'] as String)
                 : AssetImage('../../../assets/photo de profil.png')
                     as ImageProvider<Object>;
