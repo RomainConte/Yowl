@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:yowl/static.dart';
 
+
 class PlusView extends StatefulWidget {
   final int userId;
   const PlusView({Key? key, required this.userId}) : super(key: key);
@@ -38,6 +39,9 @@ class _PlusViewState extends State<PlusView> {
     if (response.statusCode == 200) {
       // TODO: Handle successful response
       print('Post created successfully');
+      //je vais envoyer l'utilisateur vers la page de profil
+      Navigator.pushNamed(context, "/home", arguments: widget.userId);
+
     } else {
       // TODO: Handle error response
       print('Error creating post: ${response.statusCode}');
@@ -48,7 +52,9 @@ class _PlusViewState extends State<PlusView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MyAppBar(),
-      body: SingleChildScrollView(
+      body:Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
         // child: Padding(
         //   padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -132,6 +138,7 @@ class _PlusViewState extends State<PlusView> {
           ],
         ),
       ),
+    ),
     );
     // );
   }

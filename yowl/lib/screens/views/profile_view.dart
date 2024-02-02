@@ -171,6 +171,7 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                 ),
                 const SizedBox(height: 10),
+
                 Text(
                   'Derniers posts',
                   style: TextStyle(

@@ -6,6 +6,8 @@ import 'package:yowl/screens/politique_screen.dart';
 import 'package:yowl/screens/profile_other_screen.dart';
 // import 'package:yowl/screens/views/search_view.dart';
 import 'package:yowl/screens/login_screen.dart';
+import 'package:yowl/screens/support_screen.dart';
+import 'package:yowl/screens/views/profile_view.dart';
 
 import 'cgu_screen.dart';
 
@@ -16,7 +18,6 @@ void main() {
 
 class App extends StatelessWidget {
   const App({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,6 +26,11 @@ class App extends StatelessWidget {
       home: LoginScreen(),
       initialRoute: '/',
       routes: {
+        '/home': (context) {
+          final int userId = ModalRoute.of(context)!.settings.arguments as int;
+          return HomeScreen(userId: userId);
+        },
+        '/support': (context) => SupportPage(),
         '/cgu': (context) => const CGUPage(),
         '/politique': (context) => const PolitiquePage(),
             '/paramètres': (context) => const SettingsPage(),
