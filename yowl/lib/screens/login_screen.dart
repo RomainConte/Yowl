@@ -48,8 +48,8 @@ class _LoginScreenState extends State<LoginScreen> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text('Login Failed'),
-            content: Text('Invalid email or password'),
+            title: Text('La connection a échoué'),
+            content: Text('Votre email ou mot de passe est incorrect'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),

@@ -37,14 +37,12 @@ class _PlusViewState extends State<PlusView> {
     );
 
     if (response.statusCode == 200) {
-      // TODO: Handle successful response
-      print('Post created successfully');
-      //je vais envoyer l'utilisateur vers la page de profil
+     
       Navigator.pushNamed(context, "/home", arguments: widget.userId);
-
+      print('Publication créée avec succès');
     } else {
       // TODO: Handle error response
-      print('Error creating post: ${response.statusCode}');
+      print('Erreur de création du post : ${response.statusCode}');
     }
   }
 

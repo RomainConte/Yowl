@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-import '../../static.dart';
+import 'package:yowl/static.dart';
 
 class ProfileView extends StatefulWidget {
   final int userId;

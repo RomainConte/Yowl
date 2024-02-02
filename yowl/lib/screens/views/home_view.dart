@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:yowl/static.dart';
 
 class HomeView extends StatefulWidget {
   final int userId;
@@ -29,7 +30,7 @@ class _HomeViewState extends State<HomeView> {
 
     try {
       final response = await http.get(
-        Uri.parse('http://10.0.2.2:1337/api/posts?populate=*&userId=$userId'),
+        Uri.parse('http://$ipAdress/api/posts?populate=*&userId=$userId'),
       );
 
       print('Response: ${response.body}');
@@ -180,7 +181,7 @@ class _HomeViewState extends State<HomeView> {
       if (isLiked) {
         // Unlike post
         final response = await http.put(
-          Uri.parse('http://10.0.2.2:1337/api/posts/$postId'),
+          Uri.parse('http://$ipAdress/api/posts/$postId'),
           headers: {
             'Content-Type': 'application/json',
           },
@@ -202,7 +203,7 @@ class _HomeViewState extends State<HomeView> {
       } else {
         // Like post
         final response = await http.put(
-          Uri.parse('http://10.0.2.2:1337/api/posts/$postId'),
+          Uri.parse('http://$ipAdress/api/posts/$postId'),
           headers: {
             'Content-Type': 'application/json',
           },

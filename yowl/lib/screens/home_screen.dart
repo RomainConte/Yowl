@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.orange,
+        selectedItemColor: Color.fromRGBO(241, 185, 28, 1),
         unselectedItemColor: Colors.grey,
         onTap: (index) {
           setState(() {
@@ -64,15 +64,15 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Accueil',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'Search',
+            label: 'Recherche',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_circle_outline),
-            label: 'Plus',
+            label: 'Publier',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile',
+            label: 'Profil',
           ),
         ],
       ),
