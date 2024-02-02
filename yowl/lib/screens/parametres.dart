@@ -27,6 +27,7 @@ class SettingsPage extends StatelessWidget {
                       leading: const Icon(Icons.cookie),
                       title: const Text('Cookies'),
                       onTap: () {
+                        Navigator.pushNamed(context, '/cookies');
 
                       },
                     ),

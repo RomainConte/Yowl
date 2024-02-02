@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:yowl/screens/cookies_page.dart';
 import 'package:yowl/screens/home_screen.dart';
 import 'package:yowl/screens/parametres.dart';
 import 'package:yowl/screens/politique_screen.dart';
@@ -27,6 +28,7 @@ class App extends StatelessWidget {
       home: LoginScreen(),
       initialRoute: '/',
       routes: {
+        '/cookies': (context) => CookiePage(),
         '/login': (context) => LoginScreen(),
         '/home': (context) {
           final int userId = ModalRoute.of(context)!.settings.arguments as int;

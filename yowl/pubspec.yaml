@@ -29,6 +29,9 @@ dependencies:
   google_fonts: ^2.1.0
   timeago: ^3.6.1  # Ajout de la dépendance timeago
   password_strength: ^0.2.0  # Ajout de la dépendance password_strength
+  shared_preferences: ^2.0.8
+
+
 
 
 dev_dependencies:
