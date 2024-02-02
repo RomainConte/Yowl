@@ -13,8 +13,8 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   Future<Map<String, dynamic>> fetchUser() async {
-    final response = await http.get(
-        Uri.parse('http://$ipAdress/api/users/${widget.userId}?populate=*'));
+    final response = await http.get(Uri.parse(
+        'http://$ipAdress/api/users/${widget.userId}?populate=*'));
 
     if (response.statusCode == 200) {
       final responseData = json.decode(response.body);
@@ -48,39 +48,98 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MyAppBar(),
-      body: SingleChildScrollView(
-        child:
-      FutureBuilder<Map<String, dynamic>>(
+      appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return SizedBox(
+                      height: MediaQuery.of(context).size.height / 2,
+                      child: Padding(padding: const EdgeInsets.all(40.0),
+                          child: Column(
+                            children: <Widget>[
+                              GestureDetector(
+
+                                onTap: () {
+                                  Navigator.pushNamed(context, "/paramètres");
+                                },
+                                child: const Center(
+                                  child: Text(
+                                    'Paramètres',
+                                    style: TextStyle(fontSize: 28.0),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 40.0),
+                              GestureDetector(
+                                onTap: () {
+
+                                  Navigator.pushNamed(context, "/edit_profile",
+                                      arguments: widget.userId);
+                                },
+                                child: const Center(
+                                  child: Text(
+                                    'Modifier le profil',
+                                    style: TextStyle(fontSize: 28.0),
+                                     ),
+                                ),
+                              ),
+
+                                    const SizedBox(height: 40.0),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, "/login");
+                                },
+                                child: const Center(
+                                  child: Text(
+                                    'Se déconnecter',
+
+                                    style: TextStyle(fontSize: 28.0, color: Colors.red),
+
+
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                      )
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
+      body: FutureBuilder<Map<String, dynamic>>(
         future: fetchUser(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (snapshot.hasData) {
             final user = snapshot.data!;
-            final ImageProvider<Object> profileImage = user['pp_url'] != null
+            final ImageProvider<Object> profileImage = user['pp_url']
+             != null
                 ? NetworkImage(user['pp_url'] as String)
-                : const AssetImage('../../../assets/photo de profil.png')
+                : AssetImage('../../../assets/photo de profil.png')
                     as ImageProvider<Object>;
             final ImageProvider<Object> bannerImage = user['banner_url'] != null
                 ? NetworkImage(user['banner_url'] as String)
-                : const AssetImage('../../../assets/ban.png')
+                : AssetImage('../../../assets/banner.png')
                     as ImageProvider<Object>;
             return Column(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Image.network(
-                        user['banner_url'],
-                        // width: 430,
-                        // height: 180,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ],
+                Container(
+                  child: Image.network(
+                    user['banner_url'],
+                    width: 430,
+                    height: 180,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 Align(
@@ -108,67 +167,48 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ),
                 ),
-                // const SizedBox(height: 10),
+                const SizedBox(height: 10),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Text(
+                      user['username'] ?? 'Username',
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: _ProfileInfoRow(),
+                  ),
+                ),
+                const SizedBox(height: 10),
+
+                Text(
+                  'Derniers posts',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                buildPostGrid(user['posts']),
+                const SizedBox(height: 10),
                 Row(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16),
-                        child: Text(
-                          user['username'] ?? 'Username',
-                          style: const TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(child: Container()),
-                    const Align(
-                      alignment: Alignment.topRight,
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 16),
-                        child: _ProfileInfoRow(),
-                      ),
-                    ),
-                  ],
+                  children: [],
                 ),
-                const SizedBox(height: 10),
-                const Row(
-                  children: [
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 16),
-                        child: Text(
-                          'Derniers posts',
-                          style: TextStyle(
-                            fontSize: 20,
-                            // fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-                const SizedBox(height: 10),
-                 Column(
-                        children: [
-                          Container(
-                            child: buildPostGrid(user['posts']),
-                          ),
-                          
-                        ],
-                      ),
               ],
             );
           } else {
-            return const Center(child: Text('No user found'));
+            return Center(child: Text('No user found'));
           }
         },
-      ),
       ),
     );
   }
@@ -191,69 +231,6 @@ class _ProfileInfoRow extends StatelessWidget {
           ),
         ),
         SizedBox(height: 10),
-      ],
-    );
-  }
-}
-
-class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const MyAppBar({Key? key}) : super(key: key);
-
-  @override
-  Size get preferredSize => const Size.fromHeight(56);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      title: const Text(
-        'Profil',
-        style: TextStyle(
-          fontSize: 25,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      actions: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {
-            showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) {
-                return SizedBox(
-                    height: MediaQuery.of(context).size.height / 2,
-                    child: Padding(
-                        padding: const EdgeInsets.all(40.0),
-                        child: Column(
-                          children: <Widget>[
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, "/paramètres");
-                              },
-                              child: const Center(
-                                child: Text(
-                                  'Paramètres',
-                                  style: TextStyle(fontSize: 28.0),
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 40.0),
-                            GestureDetector(
-                              onTap: () {
-                                print('Menu Item 2 clicked');
-                              },
-                              child: const Center(
-                                child: Text(
-                                  'Menu Items 2',
-                                  style: TextStyle(fontSize: 28.0),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )));
-              },
-            );
-          },
-        ),
       ],
     );
   }
