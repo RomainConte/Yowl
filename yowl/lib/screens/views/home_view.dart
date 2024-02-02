@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:timeago/timeago.dart' as timeago;
-import 'package:yowl/static.dart';
 
 class HomeView extends StatefulWidget {
   final int userId;
@@ -38,12 +37,13 @@ class _HomeViewState extends State<HomeView> {
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);
 
-        if (responseData is Map<String, dynamic> && responseData.containsKey('data')) {
+        if (responseData is Map<String, dynamic> &&
+            responseData.containsKey('data')) {
           setState(() {
             posts = List<dynamic>.from(responseData['data']);
           });
 
-          // Récupérer le nom d'utilisateur à partir du premier post (s'il y a des posts)
+          // Retrieve the username from the first post (if there are posts)
           if (responseData['data'].isNotEmpty) {
             currentUserUsername = responseData['data'][0]['attributes']['user']['data'][0]['attributes']['username'];
           }
@@ -56,6 +56,54 @@ class _HomeViewState extends State<HomeView> {
     } catch (e) {
       print('Error fetching posts: $e');
     }
+  }
+
+  Future<List<dynamic>?> fetchComments(int postId) async {
+    try {
+      final response = await http.get(
+        Uri.parse("http://10.0.2.2:1337/api/commentaires?populate=*&filters%5B%24and%5D%5B0%5D%5Bpost%5D%5Bid%5D%5B%24eq%5D=$postId"),
+      );
+
+      if (response.statusCode == 200) {
+        final responseData = json.decode(response.body);
+
+        if (responseData is Map<String, dynamic> &&
+            responseData.containsKey('data')) {
+          return List<dynamic>.from(responseData['data']);
+        } else {
+          print('Invalid response format: $responseData');
+          return null;
+        }
+      } else {
+        print('Failed to load comments for post $postId');
+        return null;
+      }
+    } catch (e) {
+      print('Error fetching comments: $e');
+      return null;
+    }
+  }
+
+  Future<void> _navigateToCommentsPage(int postId) async {
+    // Retrieve comments for this post
+    List<dynamic>? commentsData = await fetchComments(postId);
+
+    // Navigate to the comments page with the comments data
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CommentsScreen(
+          currentUserUsername: currentUserUsername,
+          commentsData: commentsData,
+          postId: postId,
+          currentUserId: currentUserId,
+          onCommentSubmitted: (newComment) {
+            // Place the code to execute when the comment is submitted here.
+            // You can, for example, refresh the list of comments.
+          },
+        ),
+      ),
+    );
   }
 
   @override
@@ -86,18 +134,7 @@ class _HomeViewState extends State<HomeView> {
           final DateTime createdAt = DateTime.parse(postData['createdAt']);
 
           // Use 'pp_url' as the image for both profile and post
-          final ImageProvider<Object> profileImage =
-          postData['user']['data'][0]['attributes']['pp_url'] != null
-              ? NetworkImage(postData['user']['data'][0]['attributes']['pp_url'] as String)
-              : AssetImage('assets/default_profile_image.png') as ImageProvider<Object>;
 
-          final ImageProvider<Object> postImage =
-          postData['image_url'] != null && postData['image_url'] is String
-              ? NetworkImage(postData['image_url'] as String)
-              : profileImage;
-
-          final String postImageUrl =
-          postData['image_url'] != null && postData['image_url'] is String
               ? postData['image_url'] as String
               : '';
 
@@ -151,6 +188,7 @@ class _HomeViewState extends State<HomeView> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     LikeButton(
+                      postId: post['id'],
                       likes: likesData,
                       isLiked: isLiked,
                       onLike: () => handleLike(post['id'], isLiked),
@@ -160,7 +198,7 @@ class _HomeViewState extends State<HomeView> {
                         IconButton(
                           icon: Icon(Icons.chat_bubble_outline),
                           onPressed: () {
-                            print('Comment button pressed');
+                            _navigateToCommentsPage(post['id']);
                           },
                         ),
                       ],
@@ -187,7 +225,7 @@ class _HomeViewState extends State<HomeView> {
           },
           body: json.encode({
             'data': {
-              'likes': [], // Envoyer un tableau vide pour supprimer tous les likes
+              'likes': [],
             },
           }),
         );
@@ -235,11 +273,12 @@ class _HomeViewState extends State<HomeView> {
 }
 
 class LikeButton extends StatefulWidget {
+  final int postId;
   final List<dynamic>? likes;
   final bool isLiked;
   final VoidCallback onLike;
 
-  const LikeButton({Key? key, this.likes, required this.isLiked, required this.onLike})
+  const LikeButton({Key? key, required this.postId, this.likes, required this.isLiked, required this.onLike})
       : super(key: key);
 
   @override
