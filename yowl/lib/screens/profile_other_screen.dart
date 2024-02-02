@@ -66,13 +66,19 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              child: Image.network(
-                widget.user['banner_url'] ?? '',
-                width: 430,
-                height: 180,
-                fit: BoxFit.cover,
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    child: Image.network(
+                      widget.user['banner_url'],
+                      // width: 430,
+                      // height: 180,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 10),
             Align(
@@ -90,36 +96,56 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
               ),
             ),
             const SizedBox(height: 10),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: Text(
-                  widget.user['username'] ?? 'Username',
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+            Row(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Text(
+                      widget.user['username'] ?? 'Username',
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: _ProfileInfoRow(), // Implement or replace this widget
-              ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Derniers posts',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+                Expanded(child: Container()),
+                const Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 16),
+                    child: _ProfileInfoRow(),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 10),
-            buildPostGrid(widget.user['posts']), // Implement or replace this function
+            const Row(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16),
+                    child: Text(
+                      'Derniers posts',
+                      style: TextStyle(
+                        fontSize: 20,
+// fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Container(
+                  child: buildPostGrid(widget.user['posts']),
+                ),
+              ],
+            ),
             const SizedBox(height: 10),
             // Additional widgets or content can be added here
           ],
@@ -128,11 +154,11 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
     );
   }
 }
+
 class _ProfileInfoRow extends StatelessWidget {
   const _ProfileInfoRow({Key? key}) : super(key: key);
 
   final int subscriberCount = 1000; // Nombre d'abonnés
-
 
   @override
   Widget build(BuildContext context) {
@@ -146,28 +172,26 @@ class _ProfileInfoRow extends StatelessWidget {
           ),
         ),
         SizedBox(height: 10),
-        
       ],
     );
   }
 }
 
-  Widget buildPostGrid(List<dynamic> posts) {
-    return GridView.builder(
-      shrinkWrap: true,
-      physics:
-          NeverScrollableScrollPhysics(), // to disable GridView's scrolling
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3, // number of items per row
-        crossAxisSpacing: 4, // horizontal space between items
-        mainAxisSpacing: 4, // vertical space between items
-      ),
-      itemCount: posts.length,
-      itemBuilder: (context, index) {
-        return Image.network(
-          posts[index]['image_url'],
-          fit: BoxFit.cover,
-        );
-      },
-    );
-  }
+Widget buildPostGrid(List<dynamic> posts) {
+  return GridView.builder(
+    shrinkWrap: true,
+    physics: NeverScrollableScrollPhysics(), // to disable GridView's scrolling
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 3, // number of items per row
+      crossAxisSpacing: 4, // horizontal space between items
+      mainAxisSpacing: 4, // vertical space between items
+    ),
+    itemCount: posts.length,
+    itemBuilder: (context, index) {
+      return Image.network(
+        posts[index]['image_url'],
+        fit: BoxFit.cover,
+      );
+    },
+  );
+}
