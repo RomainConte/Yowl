@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:yowl/static.dart';
 
+
 class PlusView extends StatefulWidget {
   final int userId;
   const PlusView({Key? key, required this.userId}) : super(key: key);
@@ -36,7 +37,8 @@ class _PlusViewState extends State<PlusView> {
     );
 
     if (response.statusCode == 200) {
-      // TODO: Handle successful response
+     
+      Navigator.pushNamed(context, "/home", arguments: widget.userId);
       print('Publication créée avec succès');
     } else {
       // TODO: Handle error response
@@ -48,7 +50,9 @@ class _PlusViewState extends State<PlusView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MyAppBar(),
-      body: SingleChildScrollView(
+      body:Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
         // child: Padding(
         //   padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -132,6 +136,7 @@ class _PlusViewState extends State<PlusView> {
           ],
         ),
       ),
+    ),
     );
     // );
   }

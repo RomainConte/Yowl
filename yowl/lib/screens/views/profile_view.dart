@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'package:yowl/static.dart';
 
 class ProfileView extends StatefulWidget {
@@ -49,6 +48,53 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return SizedBox(
+                      height: MediaQuery.of(context).size.height / 2,
+                      child: Padding(padding: const EdgeInsets.all(40.0),
+                          child: Column(
+                            children: <Widget>[
+                              GestureDetector(
+
+                                onTap: () {
+                                  Navigator.pushNamed(context, "/paramètres");
+                                },
+                                child: const Center(
+                                  child: Text(
+                                    'Paramètres',
+                                    style: TextStyle(fontSize: 28.0),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 40.0),
+                              GestureDetector(
+                                onTap: () {
+                                  print('Menu Item 2 clicked');
+                                },
+                                child: const Center(
+                                  child: Text(
+                                    'Menu Items 2',
+                                    style: TextStyle(fontSize: 28.0),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                      )
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
       body: FutureBuilder<Map<String, dynamic>>(
         future: fetchUser(),
         builder: (context, snapshot) {
@@ -124,6 +170,7 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                 ),
                 const SizedBox(height: 10),
+
                 Text(
                   'Derniers posts',
                   style: TextStyle(
