@@ -48,79 +48,11 @@ class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
+
       appBar: MyAppBar(),
       body: SingleChildScrollView(
         child:
       FutureBuilder<Map<String, dynamic>>(
-=======
-      appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                builder: (BuildContext context) {
-                  return SizedBox(
-                      height: MediaQuery.of(context).size.height / 2,
-                      child: Padding(padding: const EdgeInsets.all(40.0),
-                          child: Column(
-                            children: <Widget>[
-                              GestureDetector(
-
-                                onTap: () {
-                                  Navigator.pushNamed(context, "/paramètres");
-                                },
-                                child: const Center(
-                                  child: Text(
-                                    'Paramètres',
-                                    style: TextStyle(fontSize: 28.0),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 40.0),
-                              GestureDetector(
-                                onTap: () {
-
-                                  Navigator.pushNamed(context, "/edit_profile",
-                                      arguments: widget.userId);
-                                },
-                                child: const Center(
-                                  child: Text(
-                                    'Modifier le profil',
-                                    style: TextStyle(fontSize: 28.0),
-                                     ),
-                                ),
-                              ),
-
-                                    const SizedBox(height: 40.0),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(context, "/login");
-                                },
-                                child: const Center(
-                                  child: Text(
-                                    'Se déconnecter',
-
-                                    style: TextStyle(fontSize: 28.0, color: Colors.red),
-
-
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                      )
-                  );
-                },
-              );
-            },
-          ),
-        ],
-      ),
-      body: FutureBuilder<Map<String, dynamic>>(
->>>>>>> c7054d18d70a6a5778eacf7daa8a10195d2e3891
         future: fetchUser(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
