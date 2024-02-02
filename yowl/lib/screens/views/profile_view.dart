@@ -76,12 +76,14 @@ class _ProfileViewState extends State<ProfileView> {
                               const SizedBox(height: 40.0),
                               GestureDetector(
                                 onTap: () {
-                                  print('Menu Item 2 clicked');
+                                  Navigator.pushNamed(context, "/login");
                                 },
                                 child: const Center(
                                   child: Text(
-                                    'Menu Items 2',
-                                    style: TextStyle(fontSize: 28.0),
+                                    'Se déconnecter',
+
+                                    style: TextStyle(fontSize: 28.0, color: Colors.red),
+
                                   ),
                                 ),
                               ),
