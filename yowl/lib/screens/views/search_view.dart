@@ -58,12 +58,12 @@ class Profil extends StatelessWidget {
   final String searchText;
 
   Future<List<dynamic>> fetchUsers() async {
-    final response = await http.get(Uri.parse('http://$ipAdress/api/users'));
+    final response = await http.get(Uri.parse('http://$ipAdress/api/users?populate=*'));
 
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
-      throw Exception('Failed to load users');
+      throw Exception('Erreur de chargement des utilisateurs');
     }
   }
 
@@ -92,9 +92,8 @@ class Profil extends StatelessWidget {
               final user = filteredUserList[index] as Map<String, dynamic>;
 
               return ListTile(
-                leading: const CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://images.pexels.com/photos/14803768/pexels-photo-14803768.jpeg'), // Remplacez par l'URL de l'image de profil de l'utilisateur si disponible
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(user['pp_url'] as String),
                   radius: 20,
                 ),
                 title: Text(user['username']),

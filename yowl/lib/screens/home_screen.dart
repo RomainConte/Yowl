@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:yowl/screens/views/home_view.dart';
 import 'package:yowl/screens/views/profile_view.dart';
 import 'package:yowl/screens/views/search_view.dart';
-import 'package:yowl/screens/views/totem_view.dart';
 import 'package:yowl/screens/views/plus_view.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -47,13 +46,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
           SearchView(), // Pass userId if needed
           PlusView(userId: widget.userId), // Pass userId if needed
-          TotemView(), // Pass userId if needed
+
           ProfileView(userId: widget.userId), // Pass userId to ProfileView
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.orange,
+        selectedItemColor: Color.fromRGBO(241, 185, 28, 1),
         unselectedItemColor: Colors.grey,
         onTap: (index) {
           setState(() {
@@ -64,23 +63,19 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Accueil',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'Search',
+            label: 'Recherche',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add_circle_outline),
-            label: 'Plus',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Totem',
+            label: 'Publier',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'Profile',
+            label: 'Profil',
           ),
         ],
       ),

@@ -48,8 +48,8 @@ class _LoginScreenState extends State<LoginScreen> {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text('Login Failed'),
-            content: Text('Invalid email or password'),
+            title: Text('La connection a échoué'),
+            content: Text('Votre email ou mot de passe est incorrect'),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context),
@@ -117,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   )
                 ],
               ),
-              SizedBox(height: 50),
+              SizedBox(height: 25),
               Row(
                 children: [
                   Expanded(
@@ -201,6 +201,7 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      automaticallyImplyLeading: false,
       // backgroundColor: Colors.white,
       title: const Text('Se connecter'),
       centerTitle: true,
