@@ -31,64 +31,173 @@ class _SupportPageState extends State<SupportPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contactez-nous'),
+        title: const Text('Contactez-nous'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-             child: Form(
-              key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  TextFormField(
-                    controller: _nameController,
-                    decoration: InputDecoration(labelText: 'Nom'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Veuillez entrer votre nom';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: InputDecoration(labelText: 'Email'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Veuillez entrer votre email';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: _subjectController,
-                    decoration: InputDecoration(labelText: 'Sujet'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Veuillez entrer un sujet';
-                      }
-                      return null;
-                    },
-                  ),
-                  TextFormField(
-                    controller: _messageController,
-                    decoration: InputDecoration(labelText: 'Message'),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Veuillez entrer un message';
-                      }
-                      return null;
-                    },
-                  ),
-                  ElevatedButton(
-                    onPressed: _submitForm,
-                    child: Text('Envoyer'),
-              ),
-            ],
+        child: SingleChildScrollView(
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 202, 202, 202),
+                              blurRadius: 10,
+                              offset: Offset(0, 2.5),
+                            ),
+                          ],
+                        ),
+                        child: TextFormField(
+                          controller: _nameController,
+                          decoration: const InputDecoration(
+                            labelText: 'Nom',
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.all(10),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Veuillez entrer votre nom';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 25),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 202, 202, 202),
+                              blurRadius: 10,
+                              offset: Offset(0, 2.5),
+                            ),
+                          ],
+                        ),
+                        child: TextFormField(
+                          controller: _emailController,
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.all(10),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Veuillez entrer votre email';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 25),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 202, 202, 202),
+                              blurRadius: 10,
+                              offset: Offset(0, 2.5),
+                            ),
+                          ],
+                        ),
+                        child: TextFormField(
+                          controller: _subjectController,
+                          decoration: InputDecoration(
+                            labelText: 'Sujet',
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.all(10),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Veuillez entrer un sujet';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 25),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color.fromARGB(255, 202, 202, 202),
+                              blurRadius: 10,
+                              offset: Offset(0, 2.5),
+                            ),
+                          ],
+                        ),
+                        child: TextFormField(
+                          controller: _messageController,
+                          decoration: InputDecoration(
+                            labelText: 'Message',
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.all(10),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Veuillez entrer un message';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            primary: Color.fromRGBO(241, 185, 28, 1),
+                            onPrimary: Colors.white,
+                            elevation: 2,
+                            maximumSize: const Size.fromWidth(200)),
+                        onPressed: _submitForm,
+                        child: Text('Envoyer'),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ),
     );
   }
 }
