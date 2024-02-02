@@ -26,6 +26,7 @@ class App extends StatelessWidget {
       home: LoginScreen(),
       initialRoute: '/',
       routes: {
+        '/login': (context) => LoginScreen(),
         '/home': (context) {
           final int userId = ModalRoute.of(context)!.settings.arguments as int;
           return HomeScreen(userId: userId);
