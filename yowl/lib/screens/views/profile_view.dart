@@ -76,13 +76,30 @@ class _ProfileViewState extends State<ProfileView> {
                               const SizedBox(height: 40.0),
                               GestureDetector(
                                 onTap: () {
+
                                   Navigator.pushNamed(context, "/edit_profile",
                                       arguments: widget.userId);
                                 },
                                 child: const Center(
                                   child: Text(
-                                    'edit',
+                                    'Modifier le profil',
                                     style: TextStyle(fontSize: 28.0),
+                                     ),
+                                ),
+                              ),
+
+                                    const SizedBox(height: 40.0),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pushNamed(context, "/login");
+                                },
+                                child: const Center(
+                                  child: Text(
+                                    'Se déconnecter',
+
+                                    style: TextStyle(fontSize: 28.0, color: Colors.red),
+
+
                                   ),
                                 ),
                               ),

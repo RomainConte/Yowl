@@ -23,7 +23,7 @@ class _SupportPageState extends State<SupportPage> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // TODO: Handle form submission, e.g., send email or message to your support team.
+      Navigator.pop(context);
     }
   }
 
