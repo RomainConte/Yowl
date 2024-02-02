@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c6d5801-72ed-46e2-86dd-392dfb5a580d" name="Changes" comment="">
-   <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/.tmp/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/server/.tmp/data.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/lib/screens/views/home_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/lib/screens/views/home_view.dart" afterDir="false" />
-
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yowl/lib/screens/cookies_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Yowl.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Yowl.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yowl/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yowl/lib/screens/parametres.dart" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/lib/screens/parametres.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yowl/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yowl/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yowl/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,12 +57,14 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "cookies__page",
+    "io.flutter.reload.alreadyRun": "true",
+    "last_opened_file_path": "/Users/axelbou/Documents/Work Epitech/Yowl",
     "settings.editor.selected.configurable": "dart.settings",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
-
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\cours\deliveries\github\git-hub-deliveries-\Yowl_general\projet-v50\Yowl\yowl\lib\screens\views" />
@@ -66,9 +74,6 @@
       <recent name="C:\cours\deliveries\github\git-hub-deliveries-\Yowl_general\projet-v50\Yowl\yowl\lib\screens" />
     </key>
   </component>
-
-
-
   <component name="RunManager">
     <configuration name="yowl" type="FlutterRunConfigurationType" factoryName="Flutter">
       <option name="filePath" value="$PROJECT_DIR$/yowl/lib/main.dart" />
