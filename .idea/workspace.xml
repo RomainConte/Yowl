@@ -5,23 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c6d5801-72ed-46e2-86dd-392dfb5a580d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Yowl.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Yowl.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/types/generated/components.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/types/generated/components.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/types/generated/contentTypes.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/server/types/generated/contentTypes.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yowl/lib/cgu_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/lib/screens/cgu_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yowl/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/lib/screens/support_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/lib/screens/support_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/lib/screens/views/profile_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/lib/screens/views/profile_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/lib/static.dart" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/lib/static.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/linux/flutter/generated_plugins.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yowl/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/windows/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yowl/lib/screens/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/yowl/lib/screens/home_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yowl/lib/screens/views/totem_view.dart" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +53,7 @@
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
     "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "parametre",
+    "git-widget-placeholder": "fixbug",
     "io.flutter.reload.alreadyRun": "true",
     "last_opened_file_path": "C:/cours/deliveries/github/git-hub-deliveries-/Yowl_general/projet-v52/Yowl",
     "settings.editor.selected.configurable": "dart.settings",

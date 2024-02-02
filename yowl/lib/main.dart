@@ -9,7 +9,7 @@ import 'package:yowl/screens/login_screen.dart';
 import 'package:yowl/screens/support_screen.dart';
 import 'package:yowl/screens/views/profile_view.dart';
 
-import 'cgu_screen.dart';
+import 'screens/cgu_screen.dart';
 
 
 void main() {
