@@ -113,6 +113,12 @@
       "type": "string",
       "default": "https://www.inspiredrec.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbk1HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--0725fc0328bc750a0fcc18a18ffde9bcca5b8dff/img-placeholder.jpg",
       "required": true
+    },
+    "commentaires": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::commentaire.commentaire",
+      "mappedBy": "users_permissions_user"
     }
   }
 }

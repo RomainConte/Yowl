@@ -412,6 +412,7 @@ export interface ApiCommentaireCommentaire extends Schema.CollectionType {
     singularName: 'commentaire';
     pluralName: 'commentaires';
     displayName: 'commentaire';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -422,6 +423,11 @@ export interface ApiCommentaireCommentaire extends Schema.CollectionType {
       'api::commentaire.commentaire',
       'manyToOne',
       'api::post.post'
+    >;
+    users_permissions_user: Attribute.Relation<
+      'api::commentaire.commentaire',
+      'manyToOne',
+      'plugin::users-permissions.user'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -863,6 +869,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     banner_url: Attribute.String &
       Attribute.Required &
       Attribute.DefaultTo<'https://www.inspiredrec.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbk1HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--0725fc0328bc750a0fcc18a18ffde9bcca5b8dff/img-placeholder.jpg'>;
+    commentaires: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::commentaire.commentaire'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
