@@ -192,7 +192,11 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
                   ),
                 ),
                 Expanded(child: Container()),
-                ElevatedButton(
+                Align(
+                  alignment: Alignment.topRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     primary: Color.fromRGBO(241, 185, 28, 1),
                     onPrimary: Colors.white,
@@ -202,6 +206,9 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
                   onPressed: () => toggleFollow(),
                   child: Text(isFollowing ? 'Ne plus suivre' : 'S\'abonner'),
                 ),
+                  ),
+                ),
+                
               ],
             ),
             const SizedBox(height: 10),
