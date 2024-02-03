@@ -91,6 +91,15 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Title(
+                color: Colors.black,
+                child: const Text(
+                  'Se connecter',
+                  style: TextStyle(fontSize: 20),
+                ),
+                
+              ),
+              const SizedBox(height: 30),
               Row(
                 children: [
                   Expanded(
@@ -201,11 +210,10 @@ class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(100);
   @override
   Widget build(BuildContext context) {
-
     return AppBar(
       automaticallyImplyLeading: false,
       // backgroundColor: Colors.white,
-      title: const Text('Se connecter'),
+      title: const Text('WILDHUB'),
       centerTitle: true,
     );
   }
