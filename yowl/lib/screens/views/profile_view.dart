@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:yowl/static.dart';
+import 'package:yowl/screens/follower_page.dart';
 
 class ProfileView extends StatefulWidget {
   final int userId;
@@ -146,14 +147,6 @@ class _ProfileViewState extends State<ProfileView> {
                       ),
                     ],
                   ),
-                  // Container(
-                  //   child: Image.network(
-                  //     user['banner_url'],
-                  //     // width: 430,
-                  //     // height: 180,
-                  //     fit: BoxFit.cover,
-                  //   ),
-                  // ),
                   const SizedBox(height: 10),
                   Align(
                     alignment: Alignment.centerLeft,
@@ -203,7 +196,7 @@ class _ProfileViewState extends State<ProfileView> {
                           padding: const EdgeInsets.only(right: 16),
                           child: ProfileInfoRow(
                             userId: widget.userId
-                                .toString(), // Convert to String if your userId is an int
+                                , // Convert to String if your userId is an int
                             ipAddress:
                                 ipAdress, // Assuming ipAdress is a global variable
                           ),
@@ -282,7 +275,7 @@ class _ProfileViewState extends State<ProfileView> {
 }
 
 class ProfileInfoRow extends StatefulWidget {
-  final String userId;
+  final int userId;
   final String ipAddress;
 
   const ProfileInfoRow(
@@ -328,79 +321,35 @@ class _ProfileInfoRowState extends State<ProfileInfoRow> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(
-          '$subscriberCount Abonnés',
+        Row(
+          children: [
+            Text(
+          '$subscriberCount ',
           style: TextStyle(
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 10),
+        InkWell(
+              onTap: () {
+                // Placez ici votre logique de navigation
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => FollowersPage(userId:widget.userId)), // Remplacez NouvellePage par votre page de destination
+                );
+              },
+              child: Text(
+                'Abonnés',
+                style: TextStyle(
+                  fontSize: 16,
+                  decoration: TextDecoration.underline, // Optionnel: souligne le texte pour indiquer qu'il est cliquable
+                ),
+              ),
+            ),
+          ],
+        )
+        
       ],
     );
   }
 }
 
-// class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
-//   const MyAppBar({Key? key}) : super(key: key);
-
-//   @override
-//   Size get preferredSize => const Size.fromHeight(56);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return AppBar(
-//       automaticallyImplyLeading: false,
-//       title: const Text(
-//         'Profil',
-//         style: TextStyle(fontWeight: FontWeight.bold),
-//       ),
-//       actions: <Widget>[
-//         IconButton(
-//           icon: const Icon(Icons.menu),
-//           onPressed: () {
-//             showModalBottomSheet(
-//               context: context,
-//               builder: (BuildContext context) {
-//                 return SizedBox(
-//                   height: MediaQuery.of(context).size.height / 2,
-//                   child: Padding(
-//                     padding: const EdgeInsets.all(40.0),
-//                     child: Column(
-//                       children: <Widget>[
-//                         GestureDetector(
-//                           onTap: () {
-//                             Navigator.pushNamed(context, "/paramètres");
-//                           },
-//                           child: const Center(
-//                             child: Text(
-//                               'Paramètres',
-//                               style: TextStyle(fontSize: 28.0),
-//                             ),
-//                           ),
-//                         ),
-//                         const SizedBox(height: 40.0),
-//                         GestureDetector(
-//                           onTap: () {
-//                             print('Menu Item 2 clicked');
-//                             Navigator.pushNamed(context, "/login");
-//                           },
-//                           child: const Center(
-//                             child: Text(
-//                               'Se deconnecter',
-//                               style:
-//                                   TextStyle(fontSize: 28.0, color: Colors.red),
-//                             ),
-//                           ),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 );
-//               },
-//             );
-//           },
-//         ),
-//       ],
-//     );
-//   }
-// }
