@@ -43,7 +43,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       setState(() {
         _nameController.text = data['username'];
         _emailController.text = data['email'];
-        _bioController.text = data['Biographie'];
+        _bioController.text = data['bio'];
         _pp_url_Controller.text = data['pp_url'];
         _banner_url_Controller.text = data['banner_url'];
       });
@@ -59,7 +59,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   
         "username": _nameController.text,
         "email": _emailController.text,
-        "Biographie": _bioController.text,
+        "bio": _bioController.text,
         "pp_url": _pp_url_Controller.text,
         "banner_url": _banner_url_Controller.text,
       

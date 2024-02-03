@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
-import 'package:password_strength/password_strength.dart'; // Ajout de la dépendance
+import 'package:password_strength/password_strength.dart';
 import 'package:yowl/screens/login_screen.dart';
 import 'package:yowl/static.dart';
 
@@ -18,8 +18,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController birthdateController = TextEditingController();
   bool acceptConditions = false;
   bool acceptPrivacyPolicy = false;
-
-  // for the utf8.encode method
 
   void showPasswordPolicyDialog() {
     showDialog(
@@ -45,25 +43,76 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future<void> register(BuildContext context) async {
     final password = passwordController.text;
+    final birthdateString = birthdateController.text;
+    DateTime? birthdate;
 
-    if (!isPasswordStrong(password)) {
-      // Le mot de passe n'est pas assez fort
-      showPasswordPolicyDialog();
-      return;
-    }
-
-    // Le mot de passe est assez fort, continuer avec l'enregistrement
-
-    if (!acceptConditions) {
-      // L'utilisateur n'a pas accepté les conditions générales d'utilisation
-      // Afficher un message d'erreur à l'utilisateur
+    // Try to parse the birthdate
+    try {
+      birthdate = DateTime.parse(birthdateString);
+    } catch (e) {
+      // Show error if the birthdate is invalid
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Erreur'),
-            content: Text(
-                'Veuillez accepter les conditions générales d\'utilisation.'),
+            content: Text('Format de date de naissance invalide. Utilisez AAAA-MM-JJ.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
+    // Calculate age
+    final currentDate = DateTime.now();
+    int age = currentDate.year - birthdate.year;
+    final isBirthdayPassed = currentDate.month > birthdate.month || (currentDate.month == birthdate.month && currentDate.day >= birthdate.day);
+    if (!isBirthdayPassed) {
+      age--;
+    }
+
+    // Check if user is under 18
+    if (age < 18) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Inscription refusée'),
+            content: Text('Vous devez avoir au moins 18 ans pour vous inscrire.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+      return;
+    }
+
+    if (!isPasswordStrong(password)) {
+      showPasswordPolicyDialog();
+      return;
+    }
+
+    if (!acceptConditions) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Erreur'),
+            content: Text('Veuillez accepter les conditions générales d\'utilisation.'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
@@ -86,27 +135,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
         'username': usernameController.text,
         'email': emailController.text,
         'password': sha256.convert(utf8.encode(password)).toString(),
-        'naissance': birthdateController.text,
+        'birthdate': birthdateController.text,
         'confirmed': 'true',
       },
     );
 
     if (response.statusCode == 200) {
-      // Enregistrement réussi, naviguer vers la page de connexion
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => LoginScreen()),
       );
     } else {
-      // Gérer l'erreur d'enregistrement
-      // Afficher un message d'erreur à l'utilisateur
       showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text('Erreur'),
-            content:
-                Text('Une erreur s\'est produite lors de l\'enregistrement.'),
+            content: Text('Une erreur s\'est produite lors de l\'enregistrement.'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
@@ -123,10 +168,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   bool isPasswordStrong(String password) {
     final strength = estimatePasswordStrength(password);
-    // Vous pouvez ajuster ces valeurs en fonction de la force souhaitée
-    return strength >
-        0.3; // Exemple : Le mot de passe est fort si la force est supérieure à 0.3
+    return strength > 0.3;
   }
+
 
   @override
   Widget build(BuildContext context) {

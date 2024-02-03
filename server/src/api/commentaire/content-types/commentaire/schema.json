@@ -12,20 +12,20 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "contenu": {
+    "content": {
       "type": "text"
     },
     "post": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::post.post",
-      "inversedBy": "commentaires"
+      "inversedBy": "comments"
     },
     "users_permissions_user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "commentaires"
+      "inversedBy": "comments"
     }
   }
 }
