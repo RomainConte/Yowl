@@ -271,4 +271,70 @@ class _ProfileInfoRowState extends State<ProfileInfoRow> {
       ],
     );
   }
+
+}
+
+class MyAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const MyAppBar({Key? key}) : super(key: key);
+
+  @override
+  Size get preferredSize => const Size.fromHeight(56);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      automaticallyImplyLeading: false,
+      title: const Text(
+        'Profil',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      actions: <Widget>[
+        IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height / 2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(40.0),
+                    child: Column(
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/paramètres");
+                          },
+                          child: const Center(
+                            child: Text(
+                              'Paramètres',
+                              style: TextStyle(fontSize: 28.0),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 40.0),
+                        GestureDetector(
+                          onTap: () {
+                            print('Menu Item 2 clicked');
+                            Navigator.pushNamed(context, "/login");
+                          },
+                          child: const Center(
+                            child: Text(
+                              'Se deconnecter',
+                              style:
+                                  TextStyle(fontSize: 28.0, color: Colors.red),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      ],
+    );
+  }
 }
