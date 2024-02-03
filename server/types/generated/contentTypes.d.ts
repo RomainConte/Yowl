@@ -853,7 +853,8 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     Nom: Attribute.String;
     Prenom: Attribute.String;
-    Biographie: Attribute.String;
+    Biographie: Attribute.String &
+      Attribute.DefaultTo<'Biographie \u00E0 modifier'>;
     abonnes: Attribute.Relation<
       'plugin::users-permissions.user',
       'manyToMany',

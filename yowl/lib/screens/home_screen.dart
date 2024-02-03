@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
         children: <Widget>[
           HomeView(userId: widget.userId), // Pass userId if needed
 
-          SearchView(), // Pass userId if needed
+          SearchView(userId: widget.userId,), // Pass userId if needed
           PlusView(userId: widget.userId), // Pass userId if needed
 
           ProfileView(userId: widget.userId), // Pass userId to ProfileView
