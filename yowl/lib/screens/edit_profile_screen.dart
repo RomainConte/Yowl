@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:yowl/static.dart';
 import 'package:yowl/screens/home_screen.dart';
 
-
 class EditProfileScreen extends StatefulWidget {
   final int userId;
 
@@ -56,23 +55,23 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     final url = 'http://$ipAdress/api/users/${widget.userId}';
     final headers = {"Content-Type": "application/json"};
     final body = json.encode({
-  
-        "username": _nameController.text,
-        "email": _emailController.text,
-        "Biographie": _bioController.text,
-        "pp_url": _pp_url_Controller.text,
-        "banner_url": _banner_url_Controller.text,
-      
+      "username": _nameController.text,
+      "email": _emailController.text,
+      "Biographie": _bioController.text,
+      "pp_url": _pp_url_Controller.text,
+      "banner_url": _banner_url_Controller.text,
     });
 
     try {
-      final response = await http.put(Uri.parse(url), headers: headers, body: body);
+      final response =
+          await http.put(Uri.parse(url), headers: headers, body: body);
       if (response.statusCode == 200) {
         print('Profile updated successfully');
         Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => HomeScreen(userId:widget.userId)),
-    );
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomeScreen(userId: widget.userId)),
+        );
       } else {
         print('Failed to update profile. Status code: ${response.statusCode}');
       }
@@ -85,46 +84,162 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: const Text('Modifier le profil'),
+        centerTitle: true,
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: 'Name',
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color.fromARGB(255, 202, 202, 202),
+                          blurRadius: 10,
+                          offset: Offset(0, 2.5),
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      controller: _nameController,
+                      decoration: const InputDecoration(
+                        labelText: 'Nom d\'utilisateur',
+                        contentPadding: EdgeInsets.all(10),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            TextField(
-              controller: _emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-              ),
+            const SizedBox(height: 25),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color.fromARGB(255, 202, 202, 202),
+                          blurRadius: 10,
+                          offset: Offset(0, 2.5),
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      controller: _emailController,
+                      decoration: const InputDecoration(
+                        labelText: 'Email',
+                        contentPadding: EdgeInsets.all(10),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            TextField(
-              controller: _bioController,
-              decoration: InputDecoration(
-                labelText: 'Bio',
-              ),
+            const SizedBox(height: 25),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color.fromARGB(255, 202, 202, 202),
+                          blurRadius: 10,
+                          offset: Offset(0, 2.5),
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      controller: _bioController,
+                      decoration: const InputDecoration(
+                        labelText: 'Biographie',
+                        contentPadding: EdgeInsets.all(10),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            TextField(
-              controller: _pp_url_Controller,
-              decoration: InputDecoration(
-                labelText: 'Profile Picture URL',
-              ),
+            const SizedBox(height: 25),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color.fromARGB(255, 202, 202, 202),
+                          blurRadius: 10,
+                          offset: Offset(0, 2.5),
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      controller: _pp_url_Controller,
+                      decoration: const InputDecoration(
+                        labelText: 'URL de la photo de profil',
+                        contentPadding: EdgeInsets.all(10),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            TextField(
-              controller: _banner_url_Controller,
-              decoration: InputDecoration(
-                labelText: 'Banner URL',
-              ),
+            const SizedBox(height: 25),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Color.fromARGB(255, 202, 202, 202),
+                          blurRadius: 10,
+                          offset: Offset(0, 2.5),
+                        ),
+                      ],
+                    ),
+                    child: TextField(
+                      controller: _banner_url_Controller,
+                      decoration: const InputDecoration(
+                        labelText: 'URL de la bannière',
+                        contentPadding: EdgeInsets.all(10),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 30),
+            // const SizedBox(height: 16.0),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  primary: Color.fromRGBO(241, 185, 28, 1),
+                  onPrimary: Colors.white,
+                  elevation: 3,
+                  maximumSize: const Size.fromWidth(200)),
               onPressed: () => _saveProfileChanges(),
-              child: Text('Save Changes'),
+              child: const Text('Sauvegarder'),
             ),
           ],
         ),
