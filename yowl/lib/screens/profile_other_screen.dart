@@ -33,7 +33,7 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
     if (responseCurrentUser.statusCode == 200) {
       final currentUserData = jsonDecode(responseCurrentUser.body);
       List userList = [];
-      currentUserData['abonnements'].forEach((element) {
+      currentUserData['follow'].forEach((element) {
         userList.add(element['id']);
       });
       setState(() {
@@ -51,7 +51,7 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
     final responseCurrentUser = await http.get(Uri.parse(urlUpdate));
     final currentUserData = jsonDecode(responseCurrentUser.body);
     List userList = [];
-    currentUserData['abonnements'].forEach((element) {
+    currentUserData['follow'].forEach((element) {
       userList.add(element['id']);
     });
 
@@ -64,7 +64,7 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, dynamic>{
-          "abonnements": userList,
+          "follow": userList,
         }),
       );
 
@@ -84,7 +84,7 @@ class _OtherProfilePageState extends State<OtherProfilePage> {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, dynamic>{
-          "abonnements": userList,
+          "follow": userList,
         }),
       );
 
@@ -315,8 +315,8 @@ class _ProfileInfoRowState extends State<_ProfileInfoRow> {
     if (responseCurrentUser.statusCode == 200) {
       final currentUserData = jsonDecode(responseCurrentUser.body);
       List userList = [];
-      if (currentUserData['abonnes'] != null) {
-        currentUserData['abonnes'].forEach((element) {
+      if (currentUserData['followers'] != null) {
+        currentUserData['followers'].forEach((element) {
           userList.add(element['id']);
         });
       }

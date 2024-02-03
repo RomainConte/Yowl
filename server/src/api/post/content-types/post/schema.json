@@ -12,15 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "image": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "Contenu": {
+    "content": {
       "type": "text"
     },
     "user": {
@@ -35,7 +27,7 @@
       "target": "plugin::users-permissions.user",
       "inversedBy": "posts_liked"
     },
-    "commentaires": {
+    "comments": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::commentaire.commentaire",

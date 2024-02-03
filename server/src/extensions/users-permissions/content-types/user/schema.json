@@ -69,7 +69,7 @@
       "target": "api::post.post",
       "mappedBy": "user"
     },
-    "naissance": {
+    "birthdate": {
       "type": "date"
     },
     "posts_liked": {
@@ -78,33 +78,21 @@
       "target": "api::post.post",
       "mappedBy": "likes"
     },
-    "animal_totem": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::animal.animal",
-      "mappedBy": "user"
-    },
-    "Nom": {
-      "type": "string"
-    },
-    "Prenom": {
-      "type": "string"
-    },
-    "Biographie": {
+    "bio": {
       "type": "string",
       "default": "Biographie à modifier"
     },
-    "abonnes": {
+    "followers": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "abonnements"
+      "inversedBy": "follow"
     },
-    "abonnements": {
+    "follow": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "plugin::users-permissions.user",
-      "inversedBy": "abonnes"
+      "inversedBy": "followers"
     },
     "pp_url": {
       "type": "string",
@@ -115,7 +103,7 @@
       "default": "https://www.inspiredrec.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbk1HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--0725fc0328bc750a0fcc18a18ffde9bcca5b8dff/img-placeholder.jpg",
       "required": true
     },
-    "commentaires": {
+    "comments": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::commentaire.commentaire",

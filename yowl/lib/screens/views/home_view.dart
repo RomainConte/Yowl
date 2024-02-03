@@ -207,7 +207,7 @@ class _HomeViewState extends State<HomeView> {
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
-                    '${postData['Contenu'] ?? 'No content'}',
+                    '${postData['content'] ?? 'No content'}',
                     style: TextStyle(fontSize: 16.0),
                   ),
                 ),
@@ -351,13 +351,13 @@ class _CommentsScreenState extends State<CommentsScreen> {
     try {
       // Send the new comment to the API with postId and userId
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:1337/api/commentaires'),
+        Uri.parse('http://$ipAdress/api/commentaires'),
         headers: {
           'Content-Type': 'application/json',
         },
         body: json.encode({
           'data': {
-            'contenu': newComment,
+            'content': newComment,
             'post': widget.postId,
             'users_permissions_user': widget.currentUserId,
           },
@@ -401,10 +401,10 @@ class _CommentsScreenState extends State<CommentsScreen> {
                 if (comment != null && comment["attributes"] != null) {
                   return ListTile(
                     leading: CircleAvatar(
-                      backgroundColor: Colors.blue,
+                      backgroundImage:NetworkImage( comment["attributes"]["users_permissions_user"]["data"]["attributes"]['pp_url'] as String),
                     ),
                     title: Text(comment["attributes"]["users_permissions_user"]["data"]["attributes"]['username'] ?? 'Unknown User'),
-                    subtitle: Text(comment["attributes"]['contenu'] ?? ''),
+                    subtitle: Text(comment["attributes"]['content'] ?? ''),
                   );
                 } else {
                   return SizedBox.shrink(); // Skip rendering if data is null

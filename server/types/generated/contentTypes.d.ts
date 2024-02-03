@@ -362,50 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiAnimalAnimal extends Schema.CollectionType {
-  collectionName: 'animals';
-  info: {
-    singularName: 'animal';
-    pluralName: 'animals';
-    displayName: 'animal';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    user: Attribute.Relation<
-      'api::animal.animal',
-      'manyToMany',
-      'plugin::users-permissions.user'
-    >;
-    number_individuals: Attribute.Integer;
-    state: Attribute.String;
-    Location: Attribute.String;
-    number_species: Attribute.Integer;
-    species: Attribute.String;
-    lifetime: Attribute.Integer;
-    vmax: Attribute.Integer;
-    image: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::animal.animal',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::animal.animal',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiCommentaireCommentaire extends Schema.CollectionType {
   collectionName: 'commentaires';
   info: {
@@ -418,7 +374,7 @@ export interface ApiCommentaireCommentaire extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    contenu: Attribute.Text;
+    content: Attribute.Text;
     post: Attribute.Relation<
       'api::commentaire.commentaire',
       'manyToOne',
@@ -458,8 +414,7 @@ export interface ApiPostPost extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    image: Attribute.Media;
-    Contenu: Attribute.Text;
+    content: Attribute.Text;
     user: Attribute.Relation<
       'api::post.post',
       'manyToMany',
@@ -470,7 +425,7 @@ export interface ApiPostPost extends Schema.CollectionType {
       'manyToMany',
       'plugin::users-permissions.user'
     >;
-    commentaires: Attribute.Relation<
+    comments: Attribute.Relation<
       'api::post.post',
       'oneToMany',
       'api::commentaire.commentaire'
@@ -840,27 +795,19 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToMany',
       'api::post.post'
     >;
-    naissance: Attribute.Date;
+    birthdate: Attribute.Date;
     posts_liked: Attribute.Relation<
       'plugin::users-permissions.user',
       'manyToMany',
       'api::post.post'
     >;
-    animal_totem: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'manyToMany',
-      'api::animal.animal'
-    >;
-    Nom: Attribute.String;
-    Prenom: Attribute.String;
-    Biographie: Attribute.String &
-      Attribute.DefaultTo<'Biographie \u00E0 modifier'>;
-    abonnes: Attribute.Relation<
+    bio: Attribute.String & Attribute.DefaultTo<'Biographie \u00E0 modifier'>;
+    followers: Attribute.Relation<
       'plugin::users-permissions.user',
       'manyToMany',
       'plugin::users-permissions.user'
     >;
-    abonnements: Attribute.Relation<
+    follow: Attribute.Relation<
       'plugin::users-permissions.user',
       'manyToMany',
       'plugin::users-permissions.user'
@@ -870,7 +817,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     banner_url: Attribute.String &
       Attribute.Required &
       Attribute.DefaultTo<'https://www.inspiredrec.com/rails/active_storage/blobs/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBbk1HIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--0725fc0328bc750a0fcc18a18ffde9bcca5b8dff/img-placeholder.jpg'>;
-    commentaires: Attribute.Relation<
+    comments: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToMany',
       'api::commentaire.commentaire'
@@ -949,7 +896,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::animal.animal': ApiAnimalAnimal;
       'api::commentaire.commentaire': ApiCommentaireCommentaire;
       'api::post.post': ApiPostPost;
       'plugin::upload.file': PluginUploadFile;
