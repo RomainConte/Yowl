@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:yowl/static.dart';
 
 class SearchView extends StatefulWidget {
-  const SearchView({Key? key}) : super(key: key);
+  final int userId;
+  const SearchView({Key? key, required this.userId}) : super(key: key);
 
   @override
   _SearchViewState createState() => _SearchViewState();
@@ -47,18 +48,20 @@ class _SearchViewState extends State<SearchView> {
           },
         ),
       ),
-      body: Profil(searchText: _searchController.text),
+      body: Profil(searchText: _searchController.text, userId: widget.userId),
     );
   }
 }
 
 class Profil extends StatelessWidget {
-  const Profil({Key? key, required this.searchText}) : super(key: key);
+  final int userId;
+  const Profil({Key? key, required this.searchText, required this.userId}) : super(key: key);
 
   final String searchText;
 
   Future<List<dynamic>> fetchUsers() async {
-    final response = await http.get(Uri.parse('http://$ipAdress/api/users?populate=*'));
+    final response =
+        await http.get(Uri.parse('http://$ipAdress/api/users?populate=*'));
 
     if (response.statusCode == 200) {
       return json.decode(response.body);
@@ -99,8 +102,10 @@ class Profil extends StatelessWidget {
                 title: Text(user['username']),
                 //je vais faire le lien vers la page profil other screen
                 onTap: () {
-                  Navigator.pushNamed(context, '/profile_other',
-                      arguments: user);
+                  Navigator.pushNamed(context, '/profile_other', arguments: {
+                    'user': user,
+                    'userId': userId,
+                  });
                 },
               );
             },
