@@ -22,7 +22,7 @@ class _PlusViewState extends State<PlusView> {
 
     final Map<String, String> requestData = {
       'image_url': imageUrlController.text,
-      'Contenu': captionController.text,
+      'content': captionController.text,
       'user': widget.userId.toString(),
     };
 

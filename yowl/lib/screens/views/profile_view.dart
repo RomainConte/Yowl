@@ -309,8 +309,8 @@ class _ProfileInfoRowState extends State<ProfileInfoRow> {
     if (responseCurrentUser.statusCode == 200) {
       final currentUserData = jsonDecode(responseCurrentUser.body);
       List userList = [];
-      if (currentUserData['abonnes'] != null) {
-        currentUserData['abonnes'].forEach((element) {
+      if (currentUserData['followers'] != null) {
+        currentUserData['followers'].forEach((element) {
           userList.add(element['id']);
         });
       }
