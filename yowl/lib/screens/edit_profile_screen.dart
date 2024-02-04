@@ -91,7 +91,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         title: const Text('Modifier le profil'),
         centerTitle: true,
       ),
-      body: Padding(
+      body:SingleChildScrollView( child : 
+      Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
@@ -248,6 +249,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ],
         ),
       ),
+      )
+
+
+
+
+
+
+
+
     );
   }
 }
