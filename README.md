@@ -2,46 +2,48 @@
 
 ## Description
 
-Yowl est un réseau social développé dans le cadre d'un projet scolaire, nommé **WildHub**. Il permet aux utilisateurs de se connecter, de s'inscrire, de voir les posts des autres, de créer leurs propres posts, de personnaliser leur profil (bannière, photo de profil, nom d'utilisateur, biographie), de s'abonner aux autres utilisateurs, de voir leurs abonnés, ainsi que de liker et de commenter les posts.
+Yowl is a social network developed as part of a school project named **WildHub**. It allows users to connect, register, view other's posts, create their own posts, customize their profile (banner, profile picture, username, biography), follow other users, see their followers, and like and comment on posts.
 
-## Technologies utilisées
+## Technologies Used
 
-Ce projet a été développé avec Flutter pour le front-end qui nous a permit d'avoir une application mobile et Strapi pour le back-end qui est un headless CMS qui nous a permit de gérer notre base de donnée grâce à l'api qu'il fournit
+This project was developed using Flutter for the front-end, which allowed us to have a mobile application, and Strapi for the back-end, which is a headless CMS that enabled us to manage our database through the API it provides.
 
-## Configuration et installation
+## Configuration and Installation
 
 ### Flutter
 
-Pour lancer le projet Flutter :
+To launch the Flutter project:
 
-1. Assurez-vous d'avoir les SDK Flutter et Dart installés sur votre machine.
-2. Ouvrez le dossier nommé `yowl` avec votre IDE préféré.
-3. Installez les dépendances nécessaires :
-   - Pour Flutter : `flutter pub get`
-4. Exécutez l'application sur un émulateur ou un dispositif physique.
+1. Make sure you have Flutter and Dart SDKs installed on your machine.
+2. Open the folder named `yowl` with your preferred IDE.
+3. Install the necessary dependencies:
+   - For Flutter: `flutter pub get`
+4. Run the application on an emulator or a physical device.
 
 ### Strapi
 
-Pour configurer et lancer le serveur Strapi :
+To configure and launch the Strapi server:
 
-1. Naviguez vers le dossier `server`.
-2. Installez les dépendances nécessaires :
-   - Pour NPM : `npm install`
-   - Pour Yarn : `yarn install`
-3. Lancez le serveur strapi en mode développement :
-   - Pour NPM : `npm run strapi dev`
-   - Pour Yarn : `yarn strapi dev`
+1. Navigate to the `server` folder.
+2. Install the necessary dependencies:
+   - For NPM: `npm install`
+   - For Yarn: `yarn install`
+3. Launch the Strapi server in development mode:
+   - For NPM: `npm run strapi dev`
+   - For Yarn: `yarn strapi dev`
 
-## Utilisation
+## Usage
 
-Après avoir lancé l'application Flutter et le serveur Strapi, vous pouvez naviguer sur l'application comme vous le souhaitez. Pour une première utilisation, la création d'un compte personnel sera nécessaire. Le mot de passe est chiffré avant d'être envoyé au serveur pour une sécurité renforcée.
+After launching the Flutter application and Strapi server, you can navigate through the app as you wish. For first-time use, creating a personal account will be necessary. The password is encrypted before being sent to the server for enhanced security.
+
+## Cloning the Repository
+
+Initially, you can clone the GitHub repository using the following link: https://github.com/RomainConte/Yowl.git
 
 ## Contribution
 
-Ce projet étant un projet scolaire, nous n'acceptons pas de contributions externes pour le moment.
+As this project is a school project, we are not accepting external contributions at this time.
 
-## Licence
+## License
 
-Ce projet est réalisé dans un cadre scolaire et n'est soumis à aucune licence spécifique.
-
- 
+This project is carried out in a school context and is not subject to any specific license.
