@@ -74,7 +74,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => HomeScreen(userId: widget.userId)),
+              builder: (context) => HomeScreen(userId: widget.userId,cookies:true)),
         );
       } else {
         print('Failed to update profile. Status code: ${response.statusCode}');

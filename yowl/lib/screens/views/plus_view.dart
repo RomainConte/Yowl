@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:yowl/screens/home_screen.dart';
 
 import 'package:yowl/static.dart';
 
@@ -38,7 +39,11 @@ class _PlusViewState extends State<PlusView> {
 
     if (response.statusCode == 200) {
      
-      Navigator.pushNamed(context, "/home", arguments: widget.userId);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomeScreen(userId: widget.userId,cookies:true)),
+        );
       print('Publication créée avec succès');
     } else {
       // TODO: Handle error response

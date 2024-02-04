@@ -3,13 +3,13 @@ import 'package:yowl/screens/views/home_view.dart';
 import 'package:yowl/screens/views/profile_view.dart';
 import 'package:yowl/screens/views/search_view.dart';
 import 'package:yowl/screens/views/plus_view.dart';
+import 'package:yowl/screens/cookies_page.dart'; // Make sure you have this view created for showing cookies policy
 
 class HomeScreen extends StatefulWidget {
+  final int userId;
+  bool cookies = false; // Assuming this variable will be updated based on user's choice
 
-  final int userId; // Add this line
-
-  const HomeScreen({Key? key, required this.userId}) : super(key: key); // Modify this line
-
+  HomeScreen({Key? key, required this.userId, this.cookies = false}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -23,7 +23,56 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: _selectedIndex);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!widget.cookies) {
+        _showCookiesDialog();
+      }
+    });
   }
+
+  void _showCookiesDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Politique de cookies"),
+          content: Text("Acceptez vous notre politique de cookies ?"),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Voir la politique"),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CookiePage()), // Navigate to cookies policy page
+                );
+              },
+            ),
+            TextButton(
+              child: Text("Accepter"),
+              onPressed: () {
+                setState(() {
+                  widget.cookies = true; // Update the state to reflect the user's choice
+                });
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            TextButton(
+              child: Text("Refuser"),
+              onPressed: () {
+                setState(() {
+                  widget.cookies = true; // Update the state to reflect the user's choice
+                });
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   @override
   void dispose() {
